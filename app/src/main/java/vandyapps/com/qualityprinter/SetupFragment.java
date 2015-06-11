@@ -1,10 +1,14 @@
 package vandyapps.com.qualityprinter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +32,7 @@ public class SetupFragment extends Fragment {
     private EditText PLAColor, xmin, xmax, ymin, ymax;
     private Button subtractionButton, analysisButton;
     private EcoGallery ecoGal;
+    private ImageAdapter imgAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -39,6 +44,20 @@ public class SetupFragment extends Fragment {
         }
 
         pixelBar = (SeekBar)v.findViewById(R.id.pixel_seek_bar);
+        pixelBar.setMax(25);
+        pixelBar.setProgress(10);
+        pixelBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                pixelNumber.setText(progress+" pixels");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
 
         pixelNumber = (TextView)v.findViewById(R.id.pixel_text);
 
@@ -53,11 +72,37 @@ public class SetupFragment extends Fragment {
         ymax = (EditText)v.findViewById(R.id.ymax_text);
 
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
+        subtractionButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), CameraActivity.class);
+                i.putExtra("pixelnumber",pixelBar.getProgress());
+                i.putExtra("PLAColor", PLAColor.getText());
+                i.putExtra("xmin", xmin.getText());
+                i.putExtra("xmax", xmax.getText());
+                i.putExtra("ymin", ymin.getText());
+                i.putExtra("ymax", ymax.getText());
+                // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
+                startActivity(i);
+            }
+        });
 
         analysisButton=(Button)v.findViewById(R.id.analysis_button);
+        analysisButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //Intent i = new Intent(getActivity(), CameraActivity.class);
+                // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
+                //startActivity(i);
+                Bitmap blank = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
+                Bitmap layer = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
+              //  Bitmap printed = BitmapFactory.decodeResource(getResources(), R.drawable.printed);
+                //PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, 10);
+               // Log.d("error",picture.subtractImages()+"");
+            }
+        });
 
-        ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
-        ecoGal.setAdapter(new ImageAdapter(getActivity()));
+        imgAdapter = new ImageAdapter(getActivity());
+        //ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
+        //ecoGal.setAdapter(imgAdapter);
 
 
         return v;
