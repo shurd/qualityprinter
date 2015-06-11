@@ -33,6 +33,7 @@ public class SetupFragment extends Fragment {
     private Button subtractionButton, analysisButton;
     private EcoGallery ecoGal;
     private ImageAdapter imgAdapter;
+    private ImageView img;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -92,11 +93,21 @@ public class SetupFragment extends Fragment {
                 //Intent i = new Intent(getActivity(), CameraActivity.class);
                 // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 //startActivity(i);
-                Bitmap blank = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
-                Bitmap layer = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
-              //  Bitmap printed = BitmapFactory.decodeResource(getResources(), R.drawable.printed);
-                //PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, 10);
-               // Log.d("error",picture.subtractImages()+"");
+                Bitmap blank1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
+                Bitmap blank = blank1.copy(Bitmap.Config.ARGB_8888, true);
+                blank1.recycle();
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
+                Bitmap layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+                Bitmap printed1 = BitmapFactory.decodeResource(getResources(), R.drawable.printed);
+                Bitmap printed = printed1.copy(Bitmap.Config.ARGB_8888, true);
+                printed1.recycle();
+                Log.e("error","ahfieqo");
+                PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, 0);
+                Log.e("error",picture.subtractImages()+"");
+                layer.recycle();
+                printed.recycle();
+                img.setImageBitmap(blank);
             }
         });
 
@@ -104,6 +115,7 @@ public class SetupFragment extends Fragment {
         //ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
         //ecoGal.setAdapter(imgAdapter);
 
+        img = (ImageView)v.findViewById(R.id.image);
 
         return v;
     }

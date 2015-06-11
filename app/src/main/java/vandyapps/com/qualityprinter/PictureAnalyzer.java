@@ -59,10 +59,16 @@ public class PictureAnalyzer {
         //accounting for error
         percentResize+=.01;
         resize((int)(layer.getWidth()/percentResize), (int)(layer.getHeight()/percentResize));
+        highx/=percentResize;
+        lowx/=percentResize;
+        highy/=percentResize;
+        lowy/=percentResize;
     }
     //called in findLayerBoundaries
     public void resize(int scaledWidth, int scaledHeight){
-        resized = Bitmap.createScaledBitmap(layer, scaledWidth, scaledHeight, true);
+        layer = Bitmap.createScaledBitmap(layer, scaledWidth, scaledHeight, true);
+        xmax = layer.getWidth();
+        ymax = layer.getHeight();
     }
     //after resizing the layer image to where it would fill the screen, get an array full of the icon points
     public void getPoints(){
