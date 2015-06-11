@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Quality Printer</string>
+    <string name="pixelNumber">Pixel Number</string>
+    <string name="analysis">Analysis</string>
+    <string name="subtraction">Subtraction</string>
+    <string name="colorhint">Enter the PLA Color</string>
+    <string name="xmin">x min</string>
+    <string name="xmax">x max</string>
+    <string name="ymin">y min</string>
+    <string name="ymax">y max</string>
+    <string name="set_x">Set X Values</string>
+    <string name="set_y">Set Y Values</string>
+</resources>
