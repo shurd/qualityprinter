@@ -10,4 +10,5 @@
     <string name="ymax">y max</string>
     <string name="set_x">Set X Values</string>
     <string name="set_y">Set Y Values</string>
+    <string name="setup">Setup Analysis</string>
 </resources>

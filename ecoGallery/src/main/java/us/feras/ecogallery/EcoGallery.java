@@ -19,6 +19,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.Transformation;
 import android.widget.Scroller;
+import android.widget.TextView;
 
 public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.OnGestureListener {
 
@@ -38,6 +39,8 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 	 * Horizontal spacing between items.
 	 */
 	private int mSpacing = 0;
+
+    private int position = 0;
 
 	/**
 	 * How long the transition animation should run when a child view changes
@@ -132,7 +135,10 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 	 * unpredictably if used further
 	 */
 	private boolean mBroken;
-
+    ///////////////////////////////////////
+    private View mView;
+    private int mId;
+    ////////////////////////////////
 	public EcoGallery(Context context) {
 		this(context, null);
 	}
@@ -535,6 +541,7 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 	 * Looks for the child that is closest to the center and sets it as the
 	 * selected child.
 	 */
+    //look at dis doe this though here
 	private void setSelectionToCenterChild() {
 
 		View selView = mSelectedChild;
@@ -558,6 +565,9 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			if (child.getLeft() <= galleryCenter && child.getRight() >= galleryCenter) {
 				// This child is in the center
 				newSelectedChildIndex = i;
+                //////////////////////////////////////
+                changeText(i);
+                ///////////////////////////////////////
 				break;
 			}
 
@@ -566,6 +576,9 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			if (childClosestEdgeDistance < closestEdgeDistance) {
 				closestEdgeDistance = childClosestEdgeDistance;
 				newSelectedChildIndex = i;
+                /////////////////////////////////
+                changeText(i);
+                /////////////////////////////////
 			}
 		}
 
@@ -851,7 +864,9 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			if (mShouldCallbackOnUnselectedItemClick || mDownTouchPosition == mSelectedPosition) {
 				performItemClick(mDownTouchView, mDownTouchPosition, mAdapter.getItemId(mDownTouchPosition));
 			}
-
+            /////////////////////////////////////////////
+            changeText();
+            ///////////////////////////////////////////////
 			return true;
 		}
 
@@ -940,9 +955,12 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			mDownTouchView = getChildAt(mDownTouchPosition - mFirstPosition);
 			mDownTouchView.setPressed(true);
 		}
-
-		// Reset the multiple-scroll tracking state
+        // Reset the multiple-scroll tracking state
 		mIsFirstScroll = true;
+
+        /////////////////////////////////////////////
+        changeText();
+        ////////////////////////////////////////////
 
 		// Must return true to get matching events for this down event.
 		return true;
@@ -975,6 +993,9 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 		if (mDownTouchPosition < 0) {
 			return;
 		}
+        /////////////////////////////////////////////////
+       // changeText();
+        /////////////////////////////////////////////////
 
 		performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
 		long id = getItemIdAtPosition(mDownTouchPosition);
@@ -1169,9 +1190,25 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			return true;
 		}
 
-		return false;
+        return false;
 	}
-
+    ///////////////////////////////////////////////////////////////////////////////////////
+    public int getPosition(){
+        return mDownTouchPosition;
+    }
+    public void changeText(){
+        TextView icon = (TextView)mView.findViewById(mId);
+        icon.setText(getPosition()+"");
+    }
+    public void changeText(int i){
+        TextView icon = (TextView)mView.findViewById(mId);
+        icon.setText(i+"");
+    }
+    public void setTextView(View v, int id){
+        mView = v;
+        mId = id;
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	void setSelectedPositionInt(int position) {
 		super.setSelectedPositionInt(position);
@@ -1365,7 +1402,10 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 			} else {
 				endFling(true);
 			}
-		}
+            //////////////////////////////////////////
+            //changeText(); //this messed things up
+            /////////////////////////////////////////
+        }
 
 	}
 

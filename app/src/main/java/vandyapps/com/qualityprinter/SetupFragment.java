@@ -10,14 +10,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -28,11 +32,12 @@ import us.feras.ecogallery.EcoGallery;
  */
 public class SetupFragment extends Fragment {
     private SeekBar pixelBar;
-    private TextView pixelNumber;
+    private TextView pixelNumber, iconText;
     private EditText PLAColor, xmin, xmax, ymin, ymax;
     private Button subtractionButton, analysisButton;
     private EcoGallery ecoGal;
     private ImageAdapter imgAdapter;
+    private LinearLayout mLayout;
     private ImageView img;
 
     @Override
@@ -60,7 +65,9 @@ public class SetupFragment extends Fragment {
             }
         });
 
+
         pixelNumber = (TextView)v.findViewById(R.id.pixel_text);
+        pixelNumber.setText(pixelBar.getProgress() + " pixels");
 
         PLAColor = (EditText)v.findViewById(R.id.color_edit);
 
@@ -71,6 +78,8 @@ public class SetupFragment extends Fragment {
         ymin = (EditText)v.findViewById(R.id.ymin_text);
 
         ymax = (EditText)v.findViewById(R.id.ymax_text);
+
+        iconText = (TextView)v.findViewById(R.id.icon_text);
 
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
         subtractionButton.setOnClickListener(new View.OnClickListener(){
@@ -103,19 +112,33 @@ public class SetupFragment extends Fragment {
                 Bitmap printed = printed1.copy(Bitmap.Config.ARGB_8888, true);
                 printed1.recycle();
                 Log.e("error","ahfieqo");
-                PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, 0);
+                PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, pixelBar.getProgress());
                 Log.e("error",picture.subtractImages()+"");
                 layer.recycle();
                 printed.recycle();
-                img.setImageBitmap(blank);
+                //img.setImageBitmap(blank);
             }
         });
 
         imgAdapter = new ImageAdapter(getActivity());
-        //ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
-        //ecoGal.setAdapter(imgAdapter);
+        ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
+        ecoGal.setTextView(v, R.id.icon_text);
+        ecoGal.setAdapter(imgAdapter);
+        ecoGal.setSpacing(10);
+        //iconText.setText(ecoGal.getPosition()+"");
+       // ecoGal.onShowPress();
 
-        img = (ImageView)v.findViewById(R.id.image);
+        mLayout = (LinearLayout)v.findViewById(R.id.layout);
+        mLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getWindow().getCurrentFocus().getWindowToken(),0);
+                return false;
+            }
+        });
+
+        //img = (ImageView)v.findViewById(R.id.image);
 
         return v;
     }
@@ -140,19 +163,18 @@ public class SetupFragment extends Fragment {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            // Not using convertView for simplicity. You should probably use it in real application to get better performance.
             ImageView view = (ImageView) convertView;
             if (view == null) {
                 view = new ImageView(getActivity());
             }
             switch (position) {
-                case 0: Picasso.with(context).load(R.drawable.one).resize(200,200).into(view);
+                case 0: Picasso.with(context).load(R.drawable.batarang).resize(200,200).centerCrop().into(view);
                     break;
-                case 1: Picasso.with(context).load(R.drawable.two).resize(200,200).into(view);
+                case 1: Picasso.with(context).load(R.drawable.guitar).resize(200,200).centerCrop().into(view);
                     break;
-                case 2: Picasso.with(context).load(R.drawable.three).resize(200,200).into(view);
+                case 2: Picasso.with(context).load(R.drawable.square_ruler).resize(200,200).centerCrop().into(view);
                     break;
-                default: Picasso.with(context).load(R.drawable.one).resize(200,200).into(view);
+                default: Picasso.with(context).load(R.drawable.batarang).resize(200,200).centerCrop().into(view);
             }
             //imageView.setImageResource(resId);
             return view;
