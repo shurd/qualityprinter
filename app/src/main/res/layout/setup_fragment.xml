@@ -38,8 +38,13 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="icon"
+        android:text="@string/icon_text"
         android:id="@+id/icon_text"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_image"
+        android:text="@string/view_image"/>
     <EditText
         android:id="@+id/color_edit"
         android:layout_width="match_parent"

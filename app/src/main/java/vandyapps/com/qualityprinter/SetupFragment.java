@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -34,7 +35,7 @@ public class SetupFragment extends Fragment {
     private SeekBar pixelBar;
     private TextView pixelNumber, iconText;
     private EditText PLAColor, xmin, xmax, ymin, ymax;
-    private Button subtractionButton, analysisButton;
+    private Button subtractionButton, analysisButton, viewImage;
     private EcoGallery ecoGal;
     private ImageAdapter imgAdapter;
     private LinearLayout mLayout;
@@ -81,9 +82,21 @@ public class SetupFragment extends Fragment {
 
         iconText = (TextView)v.findViewById(R.id.icon_text);
 
+
+        viewImage = (Button)v.findViewById(R.id.view_image);
+        viewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ImageDialog.class);
+                i.putExtra("imagetoload",iconText.getText());
+                startActivity(i);
+            }
+        });
+
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
         subtractionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
                 Intent i = new Intent(getActivity(), CameraActivity.class);
                 i.putExtra("pixelnumber",pixelBar.getProgress());
                 i.putExtra("PLAColor", PLAColor.getText());
@@ -138,7 +151,10 @@ public class SetupFragment extends Fragment {
             }
         });
 
-        //img = (ImageView)v.findViewById(R.id.image);
+        //hide keyboard upon start
+
+        //InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        //imm.hideSoftInputFromWindow(getActivity().getWindow().getCurrentFocus().getWindowToken(),0);
 
         return v;
     }

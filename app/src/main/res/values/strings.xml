@@ -11,4 +11,6 @@
     <string name="set_x">Set X Values</string>
     <string name="set_y">Set Y Values</string>
     <string name="setup">Setup Analysis</string>
+    <string name="icon_text">Click an Image to Select it</string>
+    <string name="view_image">View Full Image</string>
 </resources>

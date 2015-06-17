@@ -3,6 +3,7 @@ package us.feras.ecogallery;
 import java.lang.reflect.Field;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -541,7 +542,7 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
 	 * Looks for the child that is closest to the center and sets it as the
 	 * selected child.
 	 */
-    //look at dis doe this though here
+    //look at dis doe this though here HERE
 	private void setSelectionToCenterChild() {
 
 		View selView = mSelectedChild;
@@ -1198,11 +1199,23 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
     }
     public void changeText(){
         TextView icon = (TextView)mView.findViewById(mId);
-        icon.setText(getPosition()+"");
+        if(getPosition()==0)
+            icon.setText("Batarang");
+        else if(getPosition()==1)
+            icon.setText("Guitar");
+        else if(getPosition()==2)
+            icon.setText("Square Ruler");
+        //icon.setText(getPosition()+"");
     }
     public void changeText(int i){
         TextView icon = (TextView)mView.findViewById(mId);
-        icon.setText(i+"");
+        if(i==0)
+            icon.setText("Batarang");
+        else if(i==1)
+            icon.setText("Guitar");
+        else if(i==2)
+            icon.setText("Square Ruler");
+        //icon.setText(i+"");
     }
     public void setTextView(View v, int id){
         mView = v;
