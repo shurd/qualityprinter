@@ -78,7 +78,8 @@ public class PictureAnalyzer {
             {
                 int pixelColor = Color.blue(layer.getPixel(i, j));
                 //for slic3r change below to red>240&&blue<200
-                if (pixelColor>240)//red but not white (red<240&&blue<200) gives outline and perimeter
+                if (pixelColor<10)//red but not white (red<240&&blue<200) gives outline and perimeter
+                //pixelColor>240
                 {// use .svg and http://garyhodgson.github.io/slic3rsvgviewer/
                     x.add(i);
                     y.add(j);

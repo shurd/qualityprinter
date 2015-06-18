@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,6 +42,7 @@ public class SetupFragment extends Fragment {
     private ImageAdapter imgAdapter;
     private LinearLayout mLayout;
     private ImageView img;
+    private String xminText, xmaxText, yminText, ymaxText, color;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -71,14 +74,88 @@ public class SetupFragment extends Fragment {
         pixelNumber.setText(pixelBar.getProgress() + " pixels");
 
         PLAColor = (EditText)v.findViewById(R.id.color_edit);
+        PLAColor.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+                color = s.toString();
+            }
+        });
 
         xmin = (EditText)v.findViewById(R.id.xmin_text);
+        xmin.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+                xminText = s.toString();
+            }
+        });
         xmax = (EditText)v.findViewById(R.id.xmax_text);
+        xmax.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+                xmaxText = s.toString();
+            }
+        });
 
         ymin = (EditText)v.findViewById(R.id.ymin_text);
+        ymin.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+                yminText = s.toString();
+            }
+        });
 
         ymax = (EditText)v.findViewById(R.id.ymax_text);
+        ymax.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,int before, int count) {
+                ymaxText = s.toString();
+            }
+        });
 
         iconText = (TextView)v.findViewById(R.id.icon_text);
 
@@ -97,13 +174,16 @@ public class SetupFragment extends Fragment {
         subtractionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
+                //Log.e("xmin", xmin.getText());
                 Intent i = new Intent(getActivity(), CameraActivity.class);
                 i.putExtra("pixelnumber",pixelBar.getProgress());
-                i.putExtra("PLAColor", PLAColor.getText());
-                i.putExtra("xmin", xmin.getText());
-                i.putExtra("xmax", xmax.getText());
-                i.putExtra("ymin", ymin.getText());
-                i.putExtra("ymax", ymax.getText());
+                i.putExtra("PLAColor", color);
+                i.putExtra("xmin", xminText);
+                i.putExtra("xmax", xmaxText);
+                i.putExtra("ymin", yminText);
+                i.putExtra("ymax", ymaxText);
+                i.putExtra("method","subtraction");
+                i.putExtra("icon", iconText.getText());
                 // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 startActivity(i);
             }
@@ -112,10 +192,18 @@ public class SetupFragment extends Fragment {
         analysisButton=(Button)v.findViewById(R.id.analysis_button);
         analysisButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //Intent i = new Intent(getActivity(), CameraActivity.class);
+                Intent i = new Intent(getActivity(), CameraActivity.class);
+                i.putExtra("pixelnumber",pixelBar.getProgress());
+                i.putExtra("PLAColor", color);
+                i.putExtra("xmin", xminText);
+                i.putExtra("xmax", xmaxText);
+                i.putExtra("ymin", yminText);
+                i.putExtra("ymax", ymaxText);
+                i.putExtra("method", "analysis");
+                i.putExtra("icon", iconText.getText());
                 // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
-                //startActivity(i);
-                Bitmap blank1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
+                startActivity(i);
+                /*Bitmap blank1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
                 Bitmap blank = blank1.copy(Bitmap.Config.ARGB_8888, true);
                 blank1.recycle();
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
@@ -128,7 +216,7 @@ public class SetupFragment extends Fragment {
                 PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, pixelBar.getProgress());
                 Log.e("error",picture.subtractImages()+"");
                 layer.recycle();
-                printed.recycle();
+                printed.recycle();*/
                 //img.setImageBitmap(blank);
             }
         });

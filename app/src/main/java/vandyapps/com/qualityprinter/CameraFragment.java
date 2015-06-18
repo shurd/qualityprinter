@@ -42,6 +42,9 @@ public class CameraFragment extends Fragment {
     private ImageView blankImage, printedImage;
     private Bitmap blank, printed;
     private RectangleView rView;
+    private double xl,xh,yl,yh;
+    private String color, method, icon;
+    private double error;
     /////////////////////////below this for taking  a picture
     private Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {
@@ -58,15 +61,13 @@ public class CameraFragment extends Fragment {
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap rotatedBitmap = Bitmap.createBitmap(picture , 0, 0, picture.getWidth(), picture.getHeight(), matrix, true);
-            Log.e("rotatedBitmap height",""+rotatedBitmap.getHeight());
-            Log.e("rotatedBitmap width",""+rotatedBitmap.getWidth());
 
-            //picture = Bitmap.createBitmap(rotatedBitmap, 0,0,rotatedBitmap.getWidth(),(int)(1.25*rotatedBitmap.getWidth()));
-            //PictureCropper newP = new PictureCropper(rotatedBitmap,0,0,0,0);
-            //newP.findOpticalCorners();
+            picture = Bitmap.createBitmap(rotatedBitmap, 0,0,rotatedBitmap.getWidth(),(int)(1.25*rotatedBitmap.getWidth()));
+            PictureCropper newP = new PictureCropper(picture,xl,xh,yl,yh);
 
-            printedImage.setImageBitmap(rotatedBitmap);
-            blank=rotatedBitmap;
+            blank = newP.rectangleProgram();
+            printedImage.setImageBitmap(blank);
+            //blank=rotatedBitmap;
             mCamera.startPreview();
         }
     };
@@ -82,13 +83,47 @@ public class CameraFragment extends Fragment {
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap rotatedBitmap = Bitmap.createBitmap(picture , 0, 0, picture.getWidth(), picture.getHeight(), matrix, true);
-            blankImage.setImageBitmap(rotatedBitmap);
-            printed=rotatedBitmap;
+
+            picture = Bitmap.createBitmap(rotatedBitmap, 0,0,rotatedBitmap.getWidth(),(int)(1.25*rotatedBitmap.getWidth()));
+            PictureCropper newP = new PictureCropper(picture,xl,xh,yl,yh);
+
+            printed = newP.rectangleProgram();
+            blankImage.setImageBitmap(printed);
+            //printed=rotatedBitmap;
             mCamera.startPreview();
          }
     };
 
     /////////////////above this is for taking a picture
+    public static CameraFragment newInstance(double pixelError, String color, String xmin, String xmax, String ymin, String ymax,String method, String iconStr){
+        Bundle args = new Bundle();
+        args.putDouble("pixelerror",pixelError);
+        args.putString("placolor",color);
+        args.putString("xmin", xmin);
+        args.putString("xmax", xmax);
+        args.putString("ymin", ymin);
+        args.putString("ymax", ymax);
+        args.putString("method", method);
+        args.putString("icon", iconStr);
+
+        CameraFragment fragment = new CameraFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        error = getArguments().getDouble("pixelerror");
+        xl=Double.parseDouble(getArguments().getString("xmin"));
+        xh = Double.parseDouble(getArguments().getString("xmax"));
+        yl = Double.parseDouble(getArguments().getString("ymin"));
+        yh = Double.parseDouble(getArguments().getString("ymax"));
+        color = getArguments().getString("placolor");
+        method = getArguments().getString("method");
+        icon = getArguments().getString("icon");
+        //setHasOptionsMenu(true);
+    }
 
     @Override
     @SuppressWarnings("deprecation")
@@ -125,18 +160,64 @@ public class CameraFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
-                blank.recycle();
-                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
-                Bitmap layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                layer1.recycle();
-                Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
-                printed.recycle();
-                PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, 0);
-                Log.e("error",picture.subtractImages()+"");
-                layer.recycle();
-                printed.recycle();
-                blankImage.setImageBitmap(blank1);
+                if(method.equals("subtraction")){
+                    Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
+                    blank.recycle();
+                    Bitmap layer;
+                    if(icon.equals("Batarang")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else if(icon.equals("Guitar")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else if(icon.equals("Square Ruler")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else {//if icon is null/empty
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    }
+
+                    Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
+                    printed.recycle();
+                    PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error);
+                    Log.e("error",picture.subtractImages()+"");
+                    layer.recycle();
+                    printed.recycle();
+                    blankImage.setImageBitmap(blank1);
+                } else if(method.equals("analysis")){
+                    Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
+                    blank.recycle();
+                    Bitmap layer;
+                    if(icon.equals("Batarang")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else if(icon.equals("Guitar")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else if(icon.equals("Square Ruler")){
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    } else {//if icon is null/empty
+                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                        layer1.recycle();
+                    }
+                    Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
+                    printed.recycle();
+                    PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1,(int) error );
+                    Log.e("error",picture.subtractImages()+"");
+                    layer.recycle();
+                    printed.recycle();
+                    blankImage.setImageBitmap(blank1);
+                }
             }
         });
         //////////////////for taking pictures
@@ -167,7 +248,12 @@ public class CameraFragment extends Fragment {
                 if(mCamera==null) return;
                 Camera.Parameters parameters = mCamera.getParameters();
                 Camera.Size s =getBestSupportedSize(parameters.getSupportedPreviewSizes(), w, h);
-                parameters.setPreviewSize(s.width, s.height);
+                //parameters.setPreviewSize(800, 480);
+                parameters.setPreviewSize(s.width, s.height);//set as 1024 and 768 - screen actually 800x1200
+                /*Log.e("set width", s.width+"");
+                Log.e("set height", s.height+"");
+                Log.e("set ratio", (double)s.width/s.height+"");
+                Log.e("screen", (double)1536/2048+"");*/
                 mCamera.setParameters(parameters);
                 mCamera.setDisplayOrientation(90);//fixes the sideways orientation
                 try{

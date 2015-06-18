@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -34,29 +35,27 @@ public class RectangleView extends View {
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.FILL);
-        float width = canvas.getWidth()-25;
-        float height = (float)1.25*(canvas.getWidth()+50);
-        //canvas.drawRect(25,50,width,height, paint);
-        canvas.drawRect(00,00,800,1050, paint);
+        //camera set to 1024x768 (picture twice this)
+        //screen set to 1200x800
+        //1.5 screen ratio, 1.33333 camera ratio
+        //camera scales to 1067x800
+        //the difference is 133px (1200-1067)
+        //try several things
+        //800x1.25+133, 800x1.25+133(1066/1200)x1.25, 800x1.25+1.33x1.25
+        //1133, 1147.68, 1166.25 - different alterations of the 133 stretch factor
+        //800x1.25x1.5/1.33 - 1125 but way too small
+
+        Rect rectangle = new Rect(0,0,800,1167);//1167 works well
+        canvas.drawRect(rectangle, paint);
 
         Log.e("canvas width",""+canvas.getWidth());
         Log.e("canvas height",""+canvas.getHeight());
         Log.e("view width",""+getWidth());
         Log.e("View height",""+getHeight());
 
-
-        // canvas.drawRect(50,50,canvas.getWidth()-50,canvas.getHeight()-250, paint);
-
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(3);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(00,00,800,1050, paint);
-
-       // canvas.drawRect(25,50,width,height, paint);
-       /* paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(3);
-
-        canvas.drawRect(0, 0, 180, 180, paint);
-        paint.setStrokeWidth(0);*/
+        canvas.drawRect(rectangle, paint);
     }
 }

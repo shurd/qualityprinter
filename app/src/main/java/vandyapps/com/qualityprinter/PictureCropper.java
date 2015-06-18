@@ -92,7 +92,7 @@ public class PictureCropper {
     }
 
     //find the pixel coordinates of the bottom left corner of the printed object using the passed in values
-    public void bottomLeftOfObject(){
+    public void bottomLeftOfObject(){//0,0 is top left of bitmap, may need to change stuff
         xl = (int)(xmin2+xpermm*xmin);//green corner
         yl = (int)(ymin1+ypermm*ymin);
     }
@@ -103,11 +103,25 @@ public class PictureCropper {
         objectHeight = (int)((ymax-ymin)*ypermm);
     }
 
+    //may be wrong due to orientation of 0,0 on bitmap (see below method)
     public void runProgram(){
         findOpticalCorners();
         calculations();
         bottomLeftOfObject();
         findDimensions();
+    }
+    public Bitmap rectangleProgram(){
+        /*int x = bitmap.getWidth();
+        int y = bitmap.getHeight();
+        xpermm = x/200;
+        ypermm = y/250;*/
+
+        int xcorner = (int)((xmin/200.)*bitmap.getWidth());
+        int ycorner = (int)(((250.-ymax)/250.)*bitmap.getHeight());
+        int xlength = (int)(((xmax-xmin)/200.)*bitmap.getWidth());
+        int ylength = (int)(((ymax-ymin)/250.)*bitmap.getHeight());
+        Bitmap bmp=Bitmap.createBitmap(bitmap,xcorner, ycorner, xlength, ylength);
+        return bmp;
     }
 
     public int getXL(){
