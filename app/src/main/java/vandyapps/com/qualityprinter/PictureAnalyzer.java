@@ -30,13 +30,23 @@ public class PictureAnalyzer {
         ymax = layer.getHeight();
         errorPixels = error;
     }
+    public PictureAnalyzer(Bitmap layer1, Bitmap printed1, int error){
+        layer = layer1;
+       // blank = blank1;
+        printed = printed1;
+        xmin = 0; //?
+        xmax = layer.getWidth();
+        ymin = 0;//?
+        ymax = layer.getHeight();
+        errorPixels = error;
+    }
 
     public void findLayerBoundaries(){
         //find the exact boundaries of a box right around the icon
         for(int i =xmin;i<xmax;i++){
             for(int j=ymin;j<ymax;j++){
                 int pixelColor = Color.blue(layer.getPixel(i,j));
-                if(pixelColor>230){
+                if(pixelColor<10){//>230 //black instead of white
                     if(lowx==-1||i<lowx)
                         lowx=i;
                     if(i>highx)
@@ -52,12 +62,16 @@ public class PictureAnalyzer {
         iconWidth = highx-lowx;
         iconHeight = highy-lowy;
         //scaling the image based on the smaller size
-        if((double)iconWidth/(double)blank.getWidth()>(double)iconHeight/(double)blank.getHeight())
-            percentResize=(double)iconWidth/blank.getWidth();
+        //if((double)iconWidth/(double)blank.getWidth()>(double)iconHeight/(double)blank.getHeight())
+        //percentResize=(double)iconWidth/blank.getWidth();
+        //else
+        //percentResize=(double)iconHeight/blank.getHeight();
+        if((double)iconWidth/(double)printed.getWidth()>(double)iconHeight/(double)printed.getHeight())
+            percentResize=(double)iconWidth/printed.getWidth();
         else
-            percentResize=(double)iconHeight/blank.getHeight();
+            percentResize=(double)iconHeight/printed.getHeight();
         //accounting for error
-        percentResize+=.01;
+        //percentResize+=.01;
         resize((int)(layer.getWidth()/percentResize), (int)(layer.getHeight()/percentResize));
         highx/=percentResize;
         lowx/=percentResize;

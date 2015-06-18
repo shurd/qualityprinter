@@ -55,7 +55,7 @@ public class SetupFragment extends Fragment {
 
         pixelBar = (SeekBar)v.findViewById(R.id.pixel_seek_bar);
         pixelBar.setMax(25);
-        pixelBar.setProgress(10);
+        pixelBar.setProgress(0);
         pixelBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -68,7 +68,6 @@ public class SetupFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
 
         pixelNumber = (TextView)v.findViewById(R.id.pixel_text);
         pixelNumber.setText(pixelBar.getProgress() + " pixels");
@@ -89,7 +88,6 @@ public class SetupFragment extends Fragment {
                 color = s.toString();
             }
         });
-
         xmin = (EditText)v.findViewById(R.id.xmin_text);
         xmin.addTextChangedListener(new TextWatcher() {
 
@@ -106,6 +104,10 @@ public class SetupFragment extends Fragment {
                 xminText = s.toString();
             }
         });
+        xminText = "0";
+        xmaxText = "200";
+        yminText = "0";
+        ymaxText = "250";
         xmax = (EditText)v.findViewById(R.id.xmax_text);
         xmax.addTextChangedListener(new TextWatcher() {
 
@@ -122,7 +124,6 @@ public class SetupFragment extends Fragment {
                 xmaxText = s.toString();
             }
         });
-
         ymin = (EditText)v.findViewById(R.id.ymin_text);
         ymin.addTextChangedListener(new TextWatcher() {
 
@@ -139,7 +140,6 @@ public class SetupFragment extends Fragment {
                 yminText = s.toString();
             }
         });
-
         ymax = (EditText)v.findViewById(R.id.ymax_text);
         ymax.addTextChangedListener(new TextWatcher() {
 
@@ -159,7 +159,6 @@ public class SetupFragment extends Fragment {
 
         iconText = (TextView)v.findViewById(R.id.icon_text);
 
-
         viewImage = (Button)v.findViewById(R.id.view_image);
         viewImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +172,6 @@ public class SetupFragment extends Fragment {
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
         subtractionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-
                 //Log.e("xmin", xmin.getText());
                 Intent i = new Intent(getActivity(), CameraActivity.class);
                 i.putExtra("pixelnumber",pixelBar.getProgress());

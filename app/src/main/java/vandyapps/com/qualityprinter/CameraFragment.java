@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,7 +40,7 @@ public class CameraFragment extends Fragment {
     private View mProgressContainer;
     private SurfaceView mSurfaceView;
     private Button take1Button, take2Button, start;
-    private ImageView blankImage, printedImage;
+    private ImageView blankImage, printedImage, edittedImage;
     private Bitmap blank, printed;
     private RectangleView rView;
     private double xl,xh,yl,yh;
@@ -135,7 +136,7 @@ public class CameraFragment extends Fragment {
 
         rView = (RectangleView)v.findViewById(R.id.rectangle_view);
 
-
+        edittedImage = (ImageView)v.findViewById(R.id.editted_image);
         blankImage = (ImageView)v.findViewById(R.id.blank_image);
         printedImage = (ImageView)v.findViewById(R.id.printed_image);
 
@@ -160,6 +161,7 @@ public class CameraFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //mProgressContainer.setVisibility(View.VISIBLE);
                 if(method.equals("subtraction")){
                     Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
                     blank.recycle();
@@ -185,13 +187,16 @@ public class CameraFragment extends Fragment {
                     Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
                     printed.recycle();
                     PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error);
-                    Log.e("error",picture.subtractImages()+"");
+                    //Log.e("error",picture.subtractImages()+"");
+                    double errorString = picture.subtractImages();
+                    Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
+                    toast.show();
                     layer.recycle();
                     printed.recycle();
-                    blankImage.setImageBitmap(blank1);
+                    edittedImage.setImageBitmap(blank1);
                 } else if(method.equals("analysis")){
-                    Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
-                    blank.recycle();
+                    //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
+                    //blank.recycle();
                     Bitmap layer;
                     if(icon.equals("Batarang")){
                         Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
@@ -212,12 +217,16 @@ public class CameraFragment extends Fragment {
                     }
                     Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
                     printed.recycle();
-                    PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1,(int) error );
-                    Log.e("error",picture.subtractImages()+"");
+                    PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error );
+                    //Log.e("error",picture.analysis()+"");//changed
+                    double errorString = picture.analysis();
+                    Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
+                    toast.show();
                     layer.recycle();
                     printed.recycle();
-                    blankImage.setImageBitmap(blank1);
+                    edittedImage.setImageBitmap(printed1);
                 }
+                //mProgressContainer.setVisibility(View.INVISIBLE);
             }
         });
         //////////////////for taking pictures
