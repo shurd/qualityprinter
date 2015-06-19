@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="9.984245" height="9.984245" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:slic3r="http://slic3r.org/namespaces/slic3r">
+  <!-- 
+  Generated using Slic3r 1.1.7
+  http://slic3r.org/
+   -->
+  <g id="layer0" slic3r:z="1.75e-007">
+    <polygon slic3r:type="contour" points="7.005601,2.978643 -3e-006,9.984245 -3e-006,-3e-006 9.984245,-3e-006" style="fill: black" />
+  </g>
+</svg>
