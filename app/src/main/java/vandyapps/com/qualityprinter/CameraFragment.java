@@ -13,6 +13,7 @@ import android.graphics.Paint;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +25,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,7 +53,9 @@ public class CameraFragment extends Fragment {
     private RectangleView rView;
     private double xl,xh,yl,yh;
     private String color, method, icon;
-    private double error;
+    private double error, errorString;
+    public ParseObject printer;
+    private boolean runTest;
     /////////////////////////below this for taking  a picture
     private Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {
@@ -126,13 +133,53 @@ public class CameraFragment extends Fragment {
         color = getArguments().getString("placolor");
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
+        runTest = true;
         //setHasOptionsMenu(true);
 
         //initialize parse
         Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
-        ParseObject newobj = new ParseObject("cat");
-        newobj.put("car", "mouse");
-        newobj.saveInBackground();
+
+        getPrinterParse();
+
+       //Log.d("Printer: ", printer.getString("test"));
+
+       // ParseObject newobj = new ParseObject("cat");
+       // newobj.put("car", "mouse");
+       // newobj.saveInBackground();
+    }
+
+    //where to put this method
+    public void executeProgram(int n){
+
+    }
+
+    //only run in on create to get object initially
+    public void getPrinterParse(){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Printer");
+        query.getInBackground("Umx4FElpfg", new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    Log.d("test", object.getString("test"));
+                    runTest =  object.getBoolean("isPrinting"); //run if false
+                    printer = object;
+                } else {
+                    Log.e("parse error","error");
+                    // something went wrong
+                }
+            }
+        });
+    }
+
+    public void updatePrinter(){
+        printer.fetchInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    runTest = object.getBoolean("isPrinting");
+                } else {
+
+                }
+            }
+        });
     }
 
     @Override
@@ -152,90 +199,43 @@ public class CameraFragment extends Fragment {
         take1Button = (Button)v.findViewById(R.id.take1_button);
         take1Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (mCamera != null) {
-                    mCamera.takePicture(mShutterCallback, null, mJpegCallBack);
-                }
+                blankMethod();
             }
         });
         take2Button = (Button)v.findViewById(R.id.take2_button);
         take2Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (mCamera != null) {
-                    //printed
-                    mCamera.takePicture(mShutterCallback2, null, mJpegCallBack2);
-                }
+                printedMethod();
             }
         });
         start = (Button)v.findViewById(R.id.start_analysis);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mProgressContainer.setVisibility(View.VISIBLE);
-                if(method.equals("subtraction")){
-                    Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
-                    blank.recycle();
-                    Bitmap layer;
-                    if(icon.equals("Batarang")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else if(icon.equals("Guitar")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else if(icon.equals("Square Ruler")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else {//if icon is null/empty
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
+                while(printer.getBoolean("isPrinting")){
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-
-                    Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
-                    printed.recycle();
-                    PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error);
-                    //Log.e("error",picture.subtractImages()+"");
-                    double errorString = picture.subtractImages();
-                    Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
-                    toast.show();
-                    layer.recycle();
-                    printed.recycle();
-                    edittedImage.setImageBitmap(blank1);
-                } else if(method.equals("analysis")){
-                    //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
-                    //blank.recycle();
-                    Bitmap layer;
-                    if(icon.equals("Batarang")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else if(icon.equals("Guitar")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else if(icon.equals("Square Ruler")){
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    } else {//if icon is null/empty
-                        Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
-                        layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                        layer1.recycle();
-                    }
-                    Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
-                    printed.recycle();
-                    PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error );
-                    //Log.e("error",picture.analysis()+"");//changed
-                    double errorString = picture.analysis();
-                    Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
-                    toast.show();
-                    layer.recycle();
-                    printed.recycle();
-                    edittedImage.setImageBitmap(printed1);
+                    updatePrinter();
                 }
-                //mProgressContainer.setVisibility(View.INVISIBLE);
+                printedMethod();
+
+                //must do a background delay before analysis because the picture updated on callback
+                //nullpointer was happening because picture was not being saved
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("done","done");
+                        startMethod();
+                        printer.put("isPrinting",true);
+                        printer.put("error",errorString);
+                        printer.saveInBackground();
+                    }
+                }, 5000);
+
             }
         });
         //////////////////for taking pictures
@@ -285,6 +285,89 @@ public class CameraFragment extends Fragment {
         });
 
         return v;
+    }
+
+    public void printedMethod(){
+        if (mCamera != null) {
+            //printed
+            mCamera.takePicture(mShutterCallback2, null, mJpegCallBack2);
+        }
+    }
+
+    public void blankMethod(){
+        if (mCamera != null) {
+            mCamera.takePicture(mShutterCallback, null, mJpegCallBack);
+            //Log.d("test", printer.getString("test"));
+        }
+    }
+
+    public void startMethod(){
+        //mProgressContainer.setVisibility(View.VISIBLE);
+        if(method.equals("subtraction")){
+            Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
+            blank.recycle();
+            Bitmap layer;
+            if(icon.equals("Batarang")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Guitar")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Square Ruler")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else {//if icon is null/empty
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            }
+
+            Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
+            printed.recycle();
+            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error);
+            //Log.e("error",picture.subtractImages()+"");
+            errorString = picture.subtractImages();
+            Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
+            toast.show();
+            layer.recycle();
+            printed.recycle();
+            edittedImage.setImageBitmap(blank1);
+        } else if(method.equals("analysis")){
+            //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
+            //blank.recycle();
+            Bitmap layer;
+            if(icon.equals("Batarang")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Guitar")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.guitar);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Square Ruler")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else {//if icon is null/empty
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            }
+            Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
+            printed.recycle();
+            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error );
+            //Log.e("error",picture.analysis()+"");//changed
+            errorString = picture.analysis();
+            Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
+            toast.show();
+            layer.recycle();
+            printed.recycle();
+            edittedImage.setImageBitmap(printed1);
+        }
+        //mProgressContainer.setVisibility(View.INVISIBLE);
     }
 
     private Camera.Size getBestSupportedSize(List<Camera.Size> sizes, int width, int height){
