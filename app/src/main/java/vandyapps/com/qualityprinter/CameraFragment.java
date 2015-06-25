@@ -24,6 +24,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -124,6 +127,12 @@ public class CameraFragment extends Fragment {
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
         //setHasOptionsMenu(true);
+
+        //initialize parse
+        Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
+        ParseObject newobj = new ParseObject("cat");
+        newobj.put("car", "mouse");
+        newobj.saveInBackground();
     }
 
     @Override

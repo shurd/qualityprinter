@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile project(':ecoGallery')
     compile files('libs/picasso-2.5.4.jar')
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 }
