@@ -1,5 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -10,9 +11,14 @@ import org.apache.batik.transcoder.TranscoderOutput;
 public class SVGtoJPG {
 
     public static void main(String[] args) throws Exception {
-
+    	String s="";
+    	Scanner in = new Scanner(System.in);
+    	 
+        System.out.println("Enter the filename");
+        s = in.nextLine();
+        
     	BufferedImage image, newimage;
-    	BufferedReader reader = new BufferedReader(new FileReader("25mm_cube.svg"));
+    	BufferedReader reader = new BufferedReader(new FileReader(s+".svg"));
         String line;
         PrintWriter writer = new PrintWriter("newfile.svg", "UTF-8");
         while ((line = reader.readLine()) != null)
@@ -38,7 +44,7 @@ public class SVGtoJPG {
         TranscoderInput input = new TranscoderInput(svgURI);
 
         // Create the transcoder output.
-        OutputStream ostream = new FileOutputStream("25mm_cube.jpg");
+        OutputStream ostream = new FileOutputStream(s+".jpg");
         TranscoderOutput output = new TranscoderOutput(ostream);
 
         // Save the image.
@@ -49,7 +55,7 @@ public class SVGtoJPG {
         ostream.close();
        
         
-        image = ImageIO.read(new File("25mm_cube.jpg"));
+        image = ImageIO.read(new File(s+".jpg"));
     	int width = image.getWidth();
 		int height = image.getHeight();
 		newimage = new BufferedImage( width, height, image.getType()  );
@@ -58,7 +64,7 @@ public class SVGtoJPG {
 				newimage.setRGB( x, height-y-1, image.getRGB( x, y  )  );
 			}
 		}
-		ImageIO.write(newimage, "jpg", new File("25mm_cube.jpg"));
+		ImageIO.write(newimage, "jpg", new File(s+".jpg"));
 		
         System.exit(0);
     }
