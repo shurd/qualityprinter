@@ -6,391 +6,391 @@
   http://slic3r.org/
    -->
   <g id="layer0" slic3r:z="1.75e-007">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer1" slic3r:z="4.75e-007">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer2" slic3r:z="7.25e-007">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer3" slic3r:z="9.75e-007">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer4" slic3r:z="1.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer5" slic3r:z="1.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer6" slic3r:z="1.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer7" slic3r:z="1.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer8" slic3r:z="2.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer9" slic3r:z="2.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer10" slic3r:z="2.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer11" slic3r:z="2.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
   </g>
   <g id="layer12" slic3r:z="3.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer13" slic3r:z="3.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer14" slic3r:z="3.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer15" slic3r:z="3.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer16" slic3r:z="4.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer17" slic3r:z="4.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer18" slic3r:z="4.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer19" slic3r:z="4.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer20" slic3r:z="5.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer21" slic3r:z="5.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer22" slic3r:z="5.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer23" slic3r:z="5.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer24" slic3r:z="6.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer25" slic3r:z="6.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer26" slic3r:z="6.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer27" slic3r:z="6.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer28" slic3r:z="7.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer29" slic3r:z="7.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer30" slic3r:z="7.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer31" slic3r:z="7.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer32" slic3r:z="8.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer33" slic3r:z="8.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer34" slic3r:z="8.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer35" slic3r:z="8.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer36" slic3r:z="9.225e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer37" slic3r:z="9.475e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer38" slic3r:z="9.725e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer39" slic3r:z="9.975e-006">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer40" slic3r:z="1.0225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer41" slic3r:z="1.0475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer42" slic3r:z="1.0725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer43" slic3r:z="1.0975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer44" slic3r:z="1.1225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer45" slic3r:z="1.1475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer46" slic3r:z="1.1725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer47" slic3r:z="1.1975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer48" slic3r:z="1.2225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer49" slic3r:z="1.2475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer50" slic3r:z="1.2725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer51" slic3r:z="1.2975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer52" slic3r:z="1.3225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer53" slic3r:z="1.3475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer54" slic3r:z="1.3725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer55" slic3r:z="1.3975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer56" slic3r:z="1.4225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer57" slic3r:z="1.4475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer58" slic3r:z="1.4725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer59" slic3r:z="1.4975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer60" slic3r:z="1.5225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer61" slic3r:z="1.5475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer62" slic3r:z="1.5725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer63" slic3r:z="1.5975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer64" slic3r:z="1.6225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer65" slic3r:z="1.6475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer66" slic3r:z="1.6725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer67" slic3r:z="1.6975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer68" slic3r:z="1.7225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer69" slic3r:z="1.7475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer70" slic3r:z="1.7725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer71" slic3r:z="1.7975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer72" slic3r:z="1.8225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer73" slic3r:z="1.8475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer74" slic3r:z="1.8725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer75" slic3r:z="1.8975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer76" slic3r:z="1.9225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer77" slic3r:z="1.9475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer78" slic3r:z="1.9725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer79" slic3r:z="1.9975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer80" slic3r:z="2.0225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer81" slic3r:z="2.0475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer82" slic3r:z="2.0725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer83" slic3r:z="2.0975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer84" slic3r:z="2.1225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer85" slic3r:z="2.1475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer86" slic3r:z="2.1725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer87" slic3r:z="2.1975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer88" slic3r:z="2.2225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer89" slic3r:z="2.2475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer90" slic3r:z="2.2725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer91" slic3r:z="2.2975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer92" slic3r:z="2.3225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer93" slic3r:z="2.3475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer94" slic3r:z="2.3725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer95" slic3r:z="2.3975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer96" slic3r:z="2.4225e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer97" slic3r:z="2.4475e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer98" slic3r:z="2.4725e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
   <g id="layer99" slic3r:z="2.4975e-005">
-    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: black" />
+    <polygon slic3r:type="contour" points="25,25 0,25 0,0 25,0" style="fill: white" />
     <polygon slic3r:type="hole" points="3,3 3,22 22,22 22,3" style="fill: black" />
   </g>
 </svg>

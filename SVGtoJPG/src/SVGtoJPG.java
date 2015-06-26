@@ -12,7 +12,7 @@ public class SVGtoJPG {
     public static void main(String[] args) throws Exception {
 
     	BufferedImage image, newimage;
-    	BufferedReader reader = new BufferedReader(new FileReader("square_ruler.svg"));
+    	BufferedReader reader = new BufferedReader(new FileReader("25mm_cube.svg"));
         String line;
         PrintWriter writer = new PrintWriter("newfile.svg", "UTF-8");
         while ((line = reader.readLine()) != null)
@@ -30,7 +30,7 @@ public class SVGtoJPG {
         t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
                    new Float(.8));
         t.addTranscodingHint(JPEGTranscoder.KEY_HEIGHT, new Float(1000));
-        //changing height
+        //changing height, for better resolution do this
 
         // Create the transcoder input.
         String svgURI = new File("newfile.svg").toURL().toString();
@@ -38,7 +38,7 @@ public class SVGtoJPG {
         TranscoderInput input = new TranscoderInput(svgURI);
 
         // Create the transcoder output.
-        OutputStream ostream = new FileOutputStream("square_ruler.jpg");
+        OutputStream ostream = new FileOutputStream("25mm_cube.jpg");
         TranscoderOutput output = new TranscoderOutput(ostream);
 
         // Save the image.
@@ -49,7 +49,7 @@ public class SVGtoJPG {
         ostream.close();
        
         
-        image = ImageIO.read(new File("square_ruler.jpg"));
+        image = ImageIO.read(new File("25mm_cube.jpg"));
     	int width = image.getWidth();
 		int height = image.getHeight();
 		newimage = new BufferedImage( width, height, image.getType()  );
@@ -58,21 +58,8 @@ public class SVGtoJPG {
 				newimage.setRGB( x, height-y-1, image.getRGB( x, y  )  );
 			}
 		}
-		ImageIO.write(newimage, "jpg", new File("square_ruler.jpg"));
+		ImageIO.write(newimage, "jpg", new File("25mm_cube.jpg"));
 		
         System.exit(0);
-        /*
-    	image = ImageIO.read(new File("square_ruler.jpg"));
-    	int width = image.getWidth();
-		int height = image.getHeight();
-		newimage = new BufferedImage( width, height, image.getType()  );
-		for( int x = 0; x < width; x++ ) {
-			for( int y = 0; y < height; y++ ) {
-				newimage.setRGB( width - x - 1, height - y - 1, image.getRGB( x, y  )  );
-			}
-		}
-		ImageIO.write(newimage, "jpg", new File("square_ruler.jpg"));
-		
-        System.exit(0);*/
     }
 }

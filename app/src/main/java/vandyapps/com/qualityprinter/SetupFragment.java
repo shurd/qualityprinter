@@ -253,7 +253,7 @@ public class SetupFragment extends Fragment {
         }
 
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         public Object getItem(int position) {
@@ -275,6 +275,8 @@ public class SetupFragment extends Fragment {
                 case 1: Picasso.with(context).load(R.drawable.guitar).resize(200,200).centerCrop().into(view);
                     break;
                 case 2: Picasso.with(context).load(R.drawable.square_ruler).resize(200,200).centerCrop().into(view);
+                    break;
+                case 3: Picasso.with(context).load(R.drawable.cube).resize(200,200).centerCrop().into(view);
                     break;
                 default: Picasso.with(context).load(R.drawable.batarang).resize(200,200).centerCrop().into(view);
             }

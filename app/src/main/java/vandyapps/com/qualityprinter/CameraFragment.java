@@ -319,6 +319,10 @@ public class CameraFragment extends Fragment {
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
                 layer1.recycle();
+            } else if(icon.equals("Cube")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.cube);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
             } else {//if icon is null/empty
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
@@ -349,6 +353,10 @@ public class CameraFragment extends Fragment {
                 layer1.recycle();
             } else if(icon.equals("Square Ruler")){
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.square_ruler);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Cube")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.cube);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
                 layer1.recycle();
             } else {//if icon is null/empty
