@@ -159,7 +159,7 @@ public class CameraFragment extends Fragment {
         query.getInBackground("Umx4FElpfg", new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    Log.d("test", object.getString("test"));
+                    //Log.d("test", object.getString("test"));
                     runTest =  object.getBoolean("isPrinting"); //run if false
                     printer = object;
                 } else {

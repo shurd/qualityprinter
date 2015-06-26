@@ -35,6 +35,8 @@ public class ImageDialog extends Activity {
             Picasso.with(this).load(R.drawable.guitar).into(mDialog);
         else if(imageNumber.equals("Square Ruler"))
             Picasso.with(this).load(R.drawable.square_ruler).into(mDialog);
+        else if(imageNumber.equals("Cube"))
+            Picasso.with(this).load(R.drawable.cube).into(mDialog);
         else
             Picasso.with(this).load(R.drawable.batarang).into(mDialog);
 

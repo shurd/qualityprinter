@@ -71,7 +71,7 @@ public class PictureAnalyzer {
         else
             percentResize=(double)iconHeight/printed.getHeight();
         //accounting for error
-        //percentResize+=.01;
+        //percentResize-=.10;//+= f >1?
         resize((int)(layer.getWidth()/percentResize), (int)(layer.getHeight()/percentResize));
         highx/=percentResize;
         lowx/=percentResize;
