@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -43,6 +44,7 @@ import java.util.UUID;
  * Created by Sam on 6/11/2015.
  */
 public class CameraFragment extends Fragment {
+    final private String myPrinter = "my_printer_id";
     private static final String TAG = "CameraFragment";
     private Camera mCamera;
     private View mProgressContainer;
@@ -52,7 +54,7 @@ public class CameraFragment extends Fragment {
     private Bitmap blank, printed;
     private RectangleView rView;
     private double xl,xh,yl,yh;
-    private String color, method, icon;
+    private String color, method, icon, myId;
     private double error, errorString;
     public ParseObject printer;
     private boolean runTest;
@@ -106,7 +108,7 @@ public class CameraFragment extends Fragment {
     };
 
     /////////////////above this is for taking a picture
-    public static CameraFragment newInstance(double pixelError, String color, String xmin, String xmax, String ymin, String ymax,String method, String iconStr){
+    public static CameraFragment newInstance(String id, double pixelError, String color, String xmin, String xmax, String ymin, String ymax,String method, String iconStr){
         Bundle args = new Bundle();
         args.putDouble("pixelerror",pixelError);
         args.putString("placolor",color);
@@ -116,6 +118,7 @@ public class CameraFragment extends Fragment {
         args.putString("ymax", ymax);
         args.putString("method", method);
         args.putString("icon", iconStr);
+        args.putString("printerid", id);
 
         CameraFragment fragment = new CameraFragment();
         fragment.setArguments(args);
@@ -134,6 +137,8 @@ public class CameraFragment extends Fragment {
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
         runTest = true;
+        myId = getArguments().getString("printerid");
+        Log.d("hey", myId);
         //setHasOptionsMenu(true);
 
         //initialize parse
@@ -155,13 +160,21 @@ public class CameraFragment extends Fragment {
 
     //only run in on create to get object initially
     public void getPrinterParse(){
+        //added below this
+        //SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+       // if(sharedPref.contains(myPrinter)){
+       // myId = sharedPref.getString(myPrinter,"Umx4FElpfg");
+        //}
+        //added above this
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Printer");
-        query.getInBackground("Umx4FElpfg", new GetCallback<ParseObject>() {
+        query.getInBackground(myId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     //Log.d("test", object.getString("test"));
                     runTest =  object.getBoolean("isPrinting"); //run if false
                     printer = object;
+                    Log.e("new ID", object.getObjectId());
                 } else {
                     Log.e("parse error","error");
                     // something went wrong

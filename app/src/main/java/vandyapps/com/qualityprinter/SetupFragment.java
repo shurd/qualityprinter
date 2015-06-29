@@ -2,6 +2,7 @@ package vandyapps.com.qualityprinter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -26,6 +27,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
 import us.feras.ecogallery.EcoGallery;
@@ -34,15 +41,16 @@ import us.feras.ecogallery.EcoGallery;
  * Created by Sam on 6/10/2015.
  */
 public class SetupFragment extends Fragment {
+    final private String myPrinter = "my_printer_id";
     private SeekBar pixelBar;
-    private TextView pixelNumber, iconText;
+    private TextView pixelNumber, iconText,printerID;
     private EditText PLAColor, xmin, xmax, ymin, ymax;
     private Button subtractionButton, analysisButton, viewImage;
     private EcoGallery ecoGal;
     private ImageAdapter imgAdapter;
     private LinearLayout mLayout;
     private ImageView img;
-    private String xminText, xmaxText, yminText, ymaxText, color;
+    private String xminText, xmaxText, yminText, ymaxText, color, myId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -182,6 +190,7 @@ public class SetupFragment extends Fragment {
                 i.putExtra("ymax", ymaxText);
                 i.putExtra("method","subtraction");
                 i.putExtra("icon", iconText.getText());
+                i.putExtra("printerid", myId);
                 // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 startActivity(i);
             }
@@ -199,6 +208,7 @@ public class SetupFragment extends Fragment {
                 i.putExtra("ymax", ymaxText);
                 i.putExtra("method", "analysis");
                 i.putExtra("icon", iconText.getText());
+                i.putExtra("printerid",myId);
                 // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 startActivity(i);
                 /*Bitmap blank1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
@@ -237,12 +247,42 @@ public class SetupFragment extends Fragment {
             }
         });
 
+        printerID = (TextView)v.findViewById(R.id.printer_id);
+        printerID.setText(myId+" is your printer ID");
         //hide keyboard upon start
 
         //InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //imm.hideSoftInputFromWindow(getActivity().getWindow().getCurrentFocus().getWindowToken(),0);
 
         return v;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
+
+        final SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if(sharedPref.contains(myPrinter)){
+            myId = sharedPref.getString(myPrinter,"");
+            Log.e("Already Have", " true");
+        } else {
+            final ParseObject newobj = new ParseObject("Printer");
+            newobj.put("isPrinting", true);
+            Log.e("Already Have", " false");
+            newobj.saveInBackground(new SaveCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        myId = newobj.getObjectId();
+                        Log.d("id ", myId);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString(myPrinter, myId);
+                        editor.commit();
+                        if (printerID != null)
+                            printerID.setText(myId + " is your printer ID");
+                    }
+                }
+            });
+        }
     }
 
     private class ImageAdapter extends BaseAdapter {

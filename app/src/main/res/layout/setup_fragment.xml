@@ -121,5 +121,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/analysis"/>
+    <TextView
+        android:gravity="center"
+        android:textSize="25dp"
+        android:id="@+id/printer_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="ID here"/>
 
 </LinearLayout>
