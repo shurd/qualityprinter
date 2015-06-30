@@ -344,7 +344,7 @@ public class CameraFragment extends Fragment {
 
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error);
+            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);
             //Log.e("error",picture.subtractImages()+"");
             errorString = picture.subtractImages();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
@@ -379,7 +379,7 @@ public class CameraFragment extends Fragment {
             }
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error );
+            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);
             //Log.e("error",picture.analysis()+"");//changed
             errorString = picture.analysis();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);

@@ -14,13 +14,14 @@ public class PictureAnalyzer {
     private int xmin, xmax, ymin, ymax;
     private int lowx = -1, highx = 0, lowy=-1, highy=0;
     private int iconWidth, iconHeight;
-    private double percentResize;
+    private double percentResize, percentResizeX, percentResizeY;
     private ArrayList<Integer> x = new ArrayList<Integer>();
     private ArrayList<Integer> y = new ArrayList<Integer>();
     private int centerx, centery;
     private int errorPixels;
+    private double xLength, yHeight;
 
-    public PictureAnalyzer(Bitmap layer1, Bitmap blank1, Bitmap printed1, int error){
+    public PictureAnalyzer(Bitmap layer1, Bitmap blank1, Bitmap printed1, int error, double xLen, double yLen){
         layer = layer1;
         blank = blank1;
         printed = printed1;
@@ -29,8 +30,10 @@ public class PictureAnalyzer {
         ymin = 0;//?
         ymax = layer.getHeight();
         errorPixels = error;
+        xLength = xLen;//the mm width of crop
+        yHeight = yLen;//the mm height of crop
     }
-    public PictureAnalyzer(Bitmap layer1, Bitmap printed1, int error){
+    public PictureAnalyzer(Bitmap layer1, Bitmap printed1, int error, double xLen, double yLen){
         layer = layer1;
        // blank = blank1;
         printed = printed1;
@@ -39,6 +42,8 @@ public class PictureAnalyzer {
         ymin = 0;//?
         ymax = layer.getHeight();
         errorPixels = error;
+        xLength = xLen;
+        yHeight = yLen;
     }
 
     public void findLayerBoundaries(){
@@ -66,20 +71,34 @@ public class PictureAnalyzer {
         //percentResize=(double)iconWidth/blank.getWidth();
         //else
         //percentResize=(double)iconHeight/blank.getHeight();
-        if((double)iconWidth/(double)printed.getWidth()>(double)iconHeight/(double)printed.getHeight())
-            percentResize=(double)iconWidth/printed.getWidth();
-        else
-            percentResize=(double)iconHeight/printed.getHeight();
-        //accounting for error
-        //percentResize-=.10;//+= f >1?
-        resize((int)(layer.getWidth()/percentResize), (int)(layer.getHeight()/percentResize));
+
+        //if((double)iconWidth/(double)printed.getWidth()>(double)iconHeight/(double)printed.getHeight())
+            percentResizeX=(double)iconWidth/printed.getWidth();
+        //else
+            percentResizeY=(double)iconHeight/printed.getHeight();
+
+        //should i change the above to incorporate percentResize x and y
+        resize((int)(layer.getWidth()/percentResizeX), (int)(layer.getHeight()/percentResizeY));
+        /*
         highx/=percentResize;
         lowx/=percentResize;
         highy/=percentResize;
-        lowy/=percentResize;
+        lowy/=percentResize;*/
     }
     //called in findLayerBoundaries
     public void resize(int scaledWidth, int scaledHeight){
+        scaledWidth = (int)((scaledWidth/xLength)*(xLength-13));//adds a 13 mm buffer
+        scaledHeight = (int)((scaledHeight/yHeight)*(yHeight-13));
+        //scaledHeight=(int)(scaledHeight*1.05);
+        //scaledWidth=(int)(scaledWidth*1.05);
+        //new calculation of percent resized
+        percentResizeY = ((double)layer.getHeight()/(double)scaledHeight); //b/c scaledWidth = layer.getWidth()/percentresize
+        percentResizeX = ((double)layer.getWidth()/(double)scaledWidth);
+        highx/=percentResizeX;
+        lowx/=percentResizeX;
+        highy/=percentResizeY;
+        lowy/=percentResizeY;//for centering
+
         layer = Bitmap.createScaledBitmap(layer, scaledWidth, scaledHeight, true);
         xmax = layer.getWidth();
         ymax = layer.getHeight();

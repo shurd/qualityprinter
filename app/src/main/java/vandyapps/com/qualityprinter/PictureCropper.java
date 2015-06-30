@@ -21,10 +21,10 @@ public class PictureCropper {
     //pass in the Bitmap to crop
     public PictureCropper(Bitmap bmp, double x1, double x2, double y1, double y2){
         bitmap = bmp;
-        xmin = x1;
-        xmax = x2;
-        ymin = y1;
-        ymax = y2;
+        xmin = x1;//for the batarang, i had to adjust this from 6.31mm to 10mm
+        xmax = x2;//i had to adjust this from 193.79 to 197.48mm
+        ymin = y1;//down 2mm
+        ymax = y2;//down 2mm, still needs to be bigger...
         yellow=true;
         orange=true;
         green=true;
