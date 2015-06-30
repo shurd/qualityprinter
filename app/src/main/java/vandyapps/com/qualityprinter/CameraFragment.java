@@ -138,19 +138,9 @@ public class CameraFragment extends Fragment {
         icon = getArguments().getString("icon");
         runTest = true;
         myId = getArguments().getString("printerid");
-        Log.d("hey", myId);
-        //setHasOptionsMenu(true);
-
         //initialize parse
         Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
-
         getPrinterParse();
-
-       //Log.d("Printer: ", printer.getString("test"));
-
-       // ParseObject newobj = new ParseObject("cat");
-       // newobj.put("car", "mouse");
-       // newobj.saveInBackground();
     }
 
     //where to put this method
@@ -160,23 +150,14 @@ public class CameraFragment extends Fragment {
 
     //only run in on create to get object initially
     public void getPrinterParse(){
-        //added below this
-        //SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-       // if(sharedPref.contains(myPrinter)){
-       // myId = sharedPref.getString(myPrinter,"Umx4FElpfg");
-        //}
-        //added above this
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Printer");
         query.getInBackground(myId, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    //Log.d("test", object.getString("test"));
                     runTest =  object.getBoolean("isPrinting"); //run if false
                     printer = object;
-                    Log.e("new ID", object.getObjectId());
                 } else {
-                    Log.e("parse error","error");
+                    //Log.e("parse error","error");
                     // something went wrong
                 }
             }
@@ -241,7 +222,6 @@ public class CameraFragment extends Fragment {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("done","done");
                         startMethod();
                         printer.put("isPrinting",true);
                         printer.put("error",errorString);
@@ -310,7 +290,6 @@ public class CameraFragment extends Fragment {
     public void blankMethod(){
         if (mCamera != null) {
             mCamera.takePicture(mShutterCallback, null, mJpegCallBack);
-            //Log.d("test", printer.getString("test"));
         }
     }
 
@@ -345,7 +324,6 @@ public class CameraFragment extends Fragment {
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             printed.recycle();
             PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);
-            //Log.e("error",picture.subtractImages()+"");
             errorString = picture.subtractImages();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
@@ -380,7 +358,6 @@ public class CameraFragment extends Fragment {
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             printed.recycle();
             PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);
-            //Log.e("error",picture.analysis()+"");//changed
             errorString = picture.analysis();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();

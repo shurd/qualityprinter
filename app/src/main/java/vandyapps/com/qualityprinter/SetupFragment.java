@@ -180,7 +180,6 @@ public class SetupFragment extends Fragment {
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
         subtractionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                //Log.e("xmin", xmin.getText());
                 Intent i = new Intent(getActivity(), CameraActivity.class);
                 i.putExtra("pixelnumber",pixelBar.getProgress());
                 i.putExtra("PLAColor", color);
@@ -191,7 +190,6 @@ public class SetupFragment extends Fragment {
                 i.putExtra("method","subtraction");
                 i.putExtra("icon", iconText.getText());
                 i.putExtra("printerid", myId);
-                // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 startActivity(i);
             }
         });
@@ -209,23 +207,7 @@ public class SetupFragment extends Fragment {
                 i.putExtra("method", "analysis");
                 i.putExtra("icon", iconText.getText());
                 i.putExtra("printerid",myId);
-                // i.putExtra(EventDescriptionFragment.EXTRA_EVENT_ID, e.getId());
                 startActivity(i);
-                /*Bitmap blank1 = BitmapFactory.decodeResource(getResources(), R.drawable.blank);
-                Bitmap blank = blank1.copy(Bitmap.Config.ARGB_8888, true);
-                blank1.recycle();
-                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.layer);
-                Bitmap layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
-                layer1.recycle();
-                Bitmap printed1 = BitmapFactory.decodeResource(getResources(), R.drawable.printed);
-                Bitmap printed = printed1.copy(Bitmap.Config.ARGB_8888, true);
-                printed1.recycle();
-                Log.e("error","ahfieqo");
-                PictureAnalyzer picture = new PictureAnalyzer(layer, blank, printed, pixelBar.getProgress());
-                Log.e("error",picture.subtractImages()+"");
-                layer.recycle();
-                printed.recycle();*/
-                //img.setImageBitmap(blank);
             }
         });
 
@@ -234,8 +216,6 @@ public class SetupFragment extends Fragment {
         ecoGal.setTextView(v, R.id.icon_text);
         ecoGal.setAdapter(imgAdapter);
         ecoGal.setSpacing(10);
-        //iconText.setText(ecoGal.getPosition()+"");
-       // ecoGal.onShowPress();
 
         mLayout = (LinearLayout)v.findViewById(R.id.layout);
         mLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -264,16 +244,13 @@ public class SetupFragment extends Fragment {
         final SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         if(sharedPref.contains(myPrinter)){
             myId = sharedPref.getString(myPrinter,"");
-            Log.e("Already Have", " true");
         } else {
             final ParseObject newobj = new ParseObject("Printer");
             newobj.put("isPrinting", true);
-            Log.e("Already Have", " false");
             newobj.saveInBackground(new SaveCallback() {
                 public void done(ParseException e) {
                     if (e == null) {
                         myId = newobj.getObjectId();
-                        Log.d("id ", myId);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString(myPrinter, myId);
                         editor.commit();
@@ -320,7 +297,6 @@ public class SetupFragment extends Fragment {
                     break;
                 default: Picasso.with(context).load(R.drawable.batarang).resize(200,200).centerCrop().into(view);
             }
-            //imageView.setImageResource(resId);
             return view;
         }
     }

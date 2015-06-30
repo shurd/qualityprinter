@@ -23,10 +23,6 @@
             android:theme="@style/myDialogTheme"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Camera2Activity"
-            android:screenOrientation="portrait">
-
-            </activity>
         <activity android:name=".CameraActivity"
             android:screenOrientation="portrait">
         </activity>

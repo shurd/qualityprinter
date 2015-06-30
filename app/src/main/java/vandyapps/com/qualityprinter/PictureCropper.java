@@ -21,10 +21,10 @@ public class PictureCropper {
     //pass in the Bitmap to crop
     public PictureCropper(Bitmap bmp, double x1, double x2, double y1, double y2){
         bitmap = bmp;
-        xmin = x1;//for the batarang, i had to adjust this from 6.31mm to 10mm
-        xmax = x2;//i had to adjust this from 193.79 to 197.48mm
-        ymin = y1;//down 2mm
-        ymax = y2;//down 2mm, still needs to be bigger...
+        xmin = x1+3.69;//adjustment because printer is off-set (x=0 is actually ~x=3.69)
+        xmax = x2+3.69;
+        ymin = y1;
+        ymax = y2;
         yellow=true;
         orange=true;
         green=true;
@@ -33,7 +33,7 @@ public class PictureCropper {
 
     //find the coordinates of the four corners (indicated with colors)
     //need to start cycle in top right, so start with max y and then move down
-    public void findOpticalCorners(){
+   /* public void findOpticalCorners(){
         for (int i = 0;i<bitmap.getWidth();i++){
             for (int j = 0;j<bitmap.getHeight();j++){
                 if(i==0&&j==0){
@@ -109,7 +109,7 @@ public class PictureCropper {
         calculations();
         bottomLeftOfObject();
         findDimensions();
-    }
+    }*/
     public Bitmap rectangleProgram(){
         /*int x = bitmap.getWidth();
         int y = bitmap.getHeight();

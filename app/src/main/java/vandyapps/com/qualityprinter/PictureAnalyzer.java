@@ -25,9 +25,9 @@ public class PictureAnalyzer {
         layer = layer1;
         blank = blank1;
         printed = printed1;
-        xmin = 0; //?
+        xmin = 0;
         xmax = layer.getWidth();
-        ymin = 0;//?
+        ymin = 0;
         ymax = layer.getHeight();
         errorPixels = error;
         xLength = xLen;//the mm width of crop
@@ -35,11 +35,10 @@ public class PictureAnalyzer {
     }
     public PictureAnalyzer(Bitmap layer1, Bitmap printed1, int error, double xLen, double yLen){
         layer = layer1;
-       // blank = blank1;
         printed = printed1;
-        xmin = 0; //?
+        xmin = 0;
         xmax = layer.getWidth();
-        ymin = 0;//?
+        ymin = 0;
         ymax = layer.getHeight();
         errorPixels = error;
         xLength = xLen;
@@ -51,7 +50,7 @@ public class PictureAnalyzer {
         for(int i =xmin;i<xmax;i++){
             for(int j=ymin;j<ymax;j++){
                 int pixelColor = Color.blue(layer.getPixel(i,j));
-                if(pixelColor<10){//>230 //black instead of white
+                if(pixelColor<10){
                     if(lowx==-1||i<lowx)
                         lowx=i;
                     if(i>highx)
@@ -66,54 +65,40 @@ public class PictureAnalyzer {
         //finding the width and height of the icon
         iconWidth = highx-lowx;
         iconHeight = highy-lowy;
-        //scaling the image based on the smaller size
-        //if((double)iconWidth/(double)blank.getWidth()>(double)iconHeight/(double)blank.getHeight())
-        //percentResize=(double)iconWidth/blank.getWidth();
-        //else
-        //percentResize=(double)iconHeight/blank.getHeight();
+        //finding the percent to resize each direction of icon image
+        percentResizeX=(double)iconWidth/printed.getWidth();
+        percentResizeY=(double)iconHeight/printed.getHeight();
 
-        //if((double)iconWidth/(double)printed.getWidth()>(double)iconHeight/(double)printed.getHeight())
-            percentResizeX=(double)iconWidth/printed.getWidth();
-        //else
-            percentResizeY=(double)iconHeight/printed.getHeight();
-
-        //should i change the above to incorporate percentResize x and y
         resize((int)(layer.getWidth()/percentResizeX), (int)(layer.getHeight()/percentResizeY));
-        /*
-        highx/=percentResize;
-        lowx/=percentResize;
-        highy/=percentResize;
-        lowy/=percentResize;*/
     }
     //called in findLayerBoundaries
     public void resize(int scaledWidth, int scaledHeight){
-        scaledWidth = (int)((scaledWidth/xLength)*(xLength-13));//adds a 13 mm buffer
+        //the dimensions of the cropped image do not scale to the dimensions of the icon
+        //this calculation done to account for 6.5mm buffer given by pronterface dimensions
+        scaledWidth = (int)((scaledWidth/xLength)*(xLength-13));
         scaledHeight = (int)((scaledHeight/yHeight)*(yHeight-13));
-        //scaledHeight=(int)(scaledHeight*1.05);
-        //scaledWidth=(int)(scaledWidth*1.05);
-        //new calculation of percent resized
-        percentResizeY = ((double)layer.getHeight()/(double)scaledHeight); //b/c scaledWidth = layer.getWidth()/percentresize
+        //new resized calculation given new dimensions
+        percentResizeY = ((double)layer.getHeight()/(double)scaledHeight);
         percentResizeX = ((double)layer.getWidth()/(double)scaledWidth);
+        //for centering the icon in the taken image
         highx/=percentResizeX;
         lowx/=percentResizeX;
         highy/=percentResizeY;
-        lowy/=percentResizeY;//for centering
-
+        lowy/=percentResizeY;
+        //actual rescale the icon image
         layer = Bitmap.createScaledBitmap(layer, scaledWidth, scaledHeight, true);
         xmax = layer.getWidth();
         ymax = layer.getHeight();
     }
-    //after resizing the layer image to where it would fill the screen, get an array full of the icon points
+    //after resizing the layer image to where it would fill the image, get an array full of the icon points
     public void getPoints(){
         for (int i = xmin;i<xmax;i++)
         {
             for (int j = ymin;j<ymax;j++)
             {
                 int pixelColor = Color.blue(layer.getPixel(i, j));
-                //for slic3r change below to red>240&&blue<200
-                if (pixelColor<10)//red but not white (red<240&&blue<200) gives outline and perimeter
-                //pixelColor>240
-                {// use .svg and http://garyhodgson.github.io/slic3rsvgviewer/
+                if (pixelColor<10)
+                {
                     x.add(i);
                     y.add(j);
                 }
@@ -134,6 +119,7 @@ public class PictureAnalyzer {
         for(int i = 0; i<x.size();i++){
             if(x.get(i)<image.getWidth()-errorPixels&&y.get(i)<image.getHeight()-errorPixels&&x.get(i)>errorPixels&&y.get(i)>errorPixels){
                 image.setPixel(x.get(i), y.get(i), Color.rgb(255, 255, 255));
+                //if error is selected, this adds more pixels
                 for(int j =1; j<errorPixels;j++){
                     image.setPixel(x.get(i) + j, y.get(i), Color.rgb(255, 255, 255));
                     image.setPixel(x.get(i), y.get(i) + j, Color.rgb(255, 255, 255));
@@ -147,20 +133,15 @@ public class PictureAnalyzer {
     }
     //perform subtraction, blank is image that is changed
     public double subtractImages(){
-        Log.e("sub done", "yes");
         findLayerBoundaries();
-        Log.e("boundaries done", "yes");
         getPoints();
-        Log.e("points done", "yes");
         centerAdjustments();
-        Log.e("center adj done", "yes");
         putPointsInPicture(printed);
-        Log.e("put points in picture done", "yes");
         putPointsInPicture(blank);
-        Log.e("put points in pic 2 done", "yes");
         int xmax1 = blank.getWidth();
         int ymax1 = blank.getHeight();
         int totalPixels = (x.size()), numberOfGreen=0;//comparing number outside to size of object
+        //now look for pixels that are out of place ie. pixels that should be inside the icon but are not
         for (int i = 0;i<xmax1;i++)
         {
             for (int j = 0;j<ymax1;j++)
@@ -190,6 +171,7 @@ public class PictureAnalyzer {
         int ymax1 = printed.getHeight();
         int totalPixels = (x.size());//comparing number outside to size of object
         int numberOfGreen=0;
+        //look for black pixels (or the PLA color pixels)
         for (int i = 0;i<xmax1;i++)
         {
             for (int j = 0;j<ymax1;j++)
