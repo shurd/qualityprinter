@@ -13,6 +13,8 @@ import android.view.View;
  * Created by Sam on 6/17/2015.
  */
 public class RectangleView extends View {
+    private final double BOARDDIMENSIONS = 1.25;//height of printer bed is 1.25 times the width
+    private int rectWidth, rectHeight;
 
     Paint paint = new Paint();
 
@@ -44,14 +46,10 @@ public class RectangleView extends View {
         //800x1.25+133, 800x1.25+133(1066/1200)x1.25, 800x1.25+1.33x1.25
         //1133, 1147.68, 1166.25 - different alterations of the 133 stretch factor
         //800x1.25x1.5/1.33 - 1125 but way too small
-
-        Rect rectangle = new Rect(0,0,800,1167);//1167 works well
+        rectWidth=CameraFragment.camWidth;
+        rectHeight=(int)(CameraFragment.camWidth*BOARDDIMENSIONS);
+        Rect rectangle = new Rect(0,0,rectWidth,rectHeight);//1167 works well for stretched screen
         canvas.drawRect(rectangle, paint);
-
-        Log.e("canvas width",""+canvas.getWidth());
-        Log.e("canvas height",""+canvas.getHeight());
-        Log.e("view width",""+getWidth());
-        Log.e("View height",""+getHeight());
 
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(3);

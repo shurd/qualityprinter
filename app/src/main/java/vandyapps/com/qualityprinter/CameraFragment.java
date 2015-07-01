@@ -11,12 +11,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -24,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -44,6 +47,7 @@ import java.util.UUID;
  * Created by Sam on 6/11/2015.
  */
 public class CameraFragment extends Fragment {
+    public static int camHeight, camWidth;
     final private String myPrinter = "my_printer_id";
     private static final String TAG = "CameraFragment";
     private Camera mCamera;
@@ -58,6 +62,7 @@ public class CameraFragment extends Fragment {
     private double error, errorString;
     public ParseObject printer;
     private boolean runTest;
+    private RelativeLayout camPrev;
     /////////////////////////below this for taking  a picture
     private Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {
@@ -180,6 +185,15 @@ public class CameraFragment extends Fragment {
     @SuppressWarnings("deprecation")
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_crime_camera, parent, false);
+        ////////////////newest stuff
+        camPrev = (RelativeLayout)v.findViewById(R.id.crime_camera_preview);
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        camWidth = size.x;
+        camPrev.getLayoutParams().width = size.x;
+        //camPrev.getLayoutParams().height = 1064;
+        //////////////////
         ////////////////for taking pictures
         mProgressContainer = v.findViewById(R.id.crime_camera_progressContainer);
         mProgressContainer.setVisibility(View.INVISIBLE);
@@ -259,12 +273,13 @@ public class CameraFragment extends Fragment {
                 if(mCamera==null) return;
                 Camera.Parameters parameters = mCamera.getParameters();
                 Camera.Size s =getBestSupportedSize(parameters.getSupportedPreviewSizes(), w, h);
-                //parameters.setPreviewSize(800, 480);
+
+                double heighttowidth = (double)s.width/(double)s.height;//the preview makes the screen sideways, so you need to reverse the values
+                camHeight = (int)(camPrev.getLayoutParams().width*heighttowidth);
+                //now set the height a new value so that the preview is not stretched
+                camPrev.getLayoutParams().height = camHeight;
                 parameters.setPreviewSize(s.width, s.height);//set as 1024 and 768 - screen actually 800x1200
-                /*Log.e("set width", s.width+"");
-                Log.e("set height", s.height+"");
-                Log.e("set ratio", (double)s.width/s.height+"");
-                Log.e("screen", (double)1536/2048+"");*/
+
                 mCamera.setParameters(parameters);
                 mCamera.setDisplayOrientation(90);//fixes the sideways orientation
                 try{

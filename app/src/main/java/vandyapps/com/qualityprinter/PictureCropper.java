@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 /**
  * Created by Sam on 6/16/2015.
@@ -120,6 +121,12 @@ public class PictureCropper {
         int ycorner = (int)(((250.-ymax)/250.)*bitmap.getHeight());
         int xlength = (int)(((xmax-xmin)/200.)*bitmap.getWidth());
         int ylength = (int)(((ymax-ymin)/250.)*bitmap.getHeight());
+        Log.e("xcorner",""+xcorner);
+        Log.e("xlength",""+xlength);
+        Log.e("bitmapWidth", bitmap.getWidth()+"");
+        Log.e("ycorner",""+ycorner);
+        Log.e("ylength",""+ylength);
+        Log.e("bitmapHeight", bitmap.getHeight()+"");
         Bitmap bmp=Bitmap.createBitmap(bitmap,xcorner, ycorner, xlength, ylength);
         return bmp;
     }

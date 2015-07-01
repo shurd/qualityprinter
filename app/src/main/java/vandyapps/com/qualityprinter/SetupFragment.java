@@ -197,17 +197,17 @@ public class SetupFragment extends Fragment {
         analysisButton=(Button)v.findViewById(R.id.analysis_button);
         analysisButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent i = new Intent(getActivity(), CameraActivity.class);
-                i.putExtra("pixelnumber",pixelBar.getProgress());
-                i.putExtra("PLAColor", color);
-                i.putExtra("xmin", xminText);
-                i.putExtra("xmax", xmaxText);
-                i.putExtra("ymin", yminText);
-                i.putExtra("ymax", ymaxText);
-                i.putExtra("method", "analysis");
-                i.putExtra("icon", iconText.getText());
-                i.putExtra("printerid",myId);
-                startActivity(i);
+                    Intent i = new Intent(getActivity(), CameraActivity.class);
+                    i.putExtra("pixelnumber", pixelBar.getProgress());
+                    i.putExtra("PLAColor", color);
+                    i.putExtra("xmin", xminText);
+                    i.putExtra("xmax", xmaxText);
+                    i.putExtra("ymin", yminText);
+                    i.putExtra("ymax", ymaxText);
+                    i.putExtra("method", "analysis");
+                    i.putExtra("icon", iconText.getText());
+                    i.putExtra("printerid", myId);
+                    startActivity(i);
             }
         });
 
