@@ -90,6 +90,7 @@ Now that you have everything set up, you can begin printing with Quality Analysi
 * Start the Android app and enter these coordinates in the EditText boxes
 * In the Android app, select how many pixels you want to add to the outside of icon (Error Buffer)
 * Select the item you are printing. An image is selected when the TextView has its name displayed
+* At the bottom of the screen, a key will be displayed. This is your printer key and you will need to enter this key in the parsetest python code. Replace the two instances of "Umx4FElpfg" with that of your key. You will only need to do this once
 * Click on "Subtraction" or "Analysis"
 * Press your "Blank Image Setting" button on Proterface
 * When the printer is done moving, set up the Android device on the stand such that the printer bed's border matches where the white rectangle is on the Camera View
@@ -98,3 +99,5 @@ Now that you have everything set up, you can begin printing with Quality Analysi
 * In pronterface, press "Print"
 * Once the device has begun printing the first layer, press "Quality Print"
 * The printer will now pause after the first layer and analyze what has been printed and report the error back.
+##Device/Printer Settings
+Here I will explain how/where to account for differences in printer bed size, device size, and printer bed offset
