@@ -99,5 +99,6 @@ Now that you have everything set up, you can begin printing with Quality Analysi
 * In pronterface, press "Print"
 * Once the device has begun printing the first layer, press "Quality Print"
 * The printer will now pause after the first layer and analyze what has been printed and report the error back.
+
 ##Device/Printer Settings
 Here I will explain how/where to account for differences in printer bed size, device size, and printer bed offset
