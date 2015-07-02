@@ -153,9 +153,14 @@ public class PictureAnalyzer {
                     int blue2 = Color.blue(printed.getPixel(i, j));
                     int red2 = Color.red(printed.getPixel(i, j));
                     int green2 = Color.green(printed.getPixel(i, j));
-                    if(Math.abs(green-green2)>100)
-                        numberOfGreen ++;
-                    blank.setPixel(i, j, Color.rgb(Math.abs(blue - blue2), Math.abs(red - red2), Math.abs(green - green2)));
+                    int newGreen = Math.abs(green-green2);
+                    int newBlue = Math.abs(blue-blue2);
+                    int newRed = Math.abs(red-red2);
+                    if((newRed>20&&newGreen>45&&newBlue>35)) {
+                        numberOfGreen++;
+                        blank.setPixel(i, j, Color.rgb(75, 160, 250));
+                    }else
+                        blank.setPixel(i, j, Color.rgb(newRed, newGreen,newBlue));
                 }
             }
         }
@@ -179,8 +184,8 @@ public class PictureAnalyzer {
                 int blue = Color.blue(printed.getPixel(i, j));
                 int red = Color.red(printed.getPixel(i, j));
                 int green = Color.green(printed.getPixel(i, j));
-                if(blue<50&&red<50&&green<50){
-                    printed.setPixel(i, j, Color.rgb(255, 0, 0));
+                if(blue<100&&red<100&&green<100){
+                    printed.setPixel(i, j, Color.rgb(75, 160, 250));
                     numberOfGreen++;
                 }
             }

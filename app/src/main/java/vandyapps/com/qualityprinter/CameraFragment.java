@@ -228,10 +228,11 @@ public class CameraFragment extends Fragment {
                     }
                     updatePrinter();
                 }
-                printedMethod();
+                printedMethod();//here
 
                 //must do a background delay before analysis because the picture updated on callback
                 //nullpointer was happening because picture was not being saved
+                //may need to make longer because recycled, was 5 now 10
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -241,7 +242,7 @@ public class CameraFragment extends Fragment {
                         printer.put("error",errorString);
                         printer.saveInBackground();
                     }
-                }, 5000);
+                }, 10000);
 
             }
         });
@@ -310,9 +311,9 @@ public class CameraFragment extends Fragment {
 
     public void startMethod(){
         //mProgressContainer.setVisibility(View.VISIBLE);
-        if(method.equals("subtraction")){
+        if(printer.getString("method").equals("s")){//method.equals("subtraction")){
             Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
-            blank.recycle();
+            //blank.recycle();
             Bitmap layer;
             if(icon.equals("Batarang")){
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
@@ -337,15 +338,16 @@ public class CameraFragment extends Fragment {
             }
 
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
-            printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);
+            //printed.recycle();
+            //Log.e("errorP", printer.getInt("errorPixels")+"");
+            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, printer.getInt("errorPixels"), xh-xl, yh-yl);//(int)error, xh-xl, yh-yl);
             errorString = picture.subtractImages();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
             layer.recycle();
             printed.recycle();
             edittedImage.setImageBitmap(blank1);
-        } else if(method.equals("analysis")){
+        } else if(printer.getString("method").equals("a")){//method.equals("analysis")){
             //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
             //blank.recycle();
             Bitmap layer;
@@ -371,8 +373,8 @@ public class CameraFragment extends Fragment {
                 layer1.recycle();
             }
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
-            printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);
+            //printed.recycle();
+            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,printer.getInt("errorPixels"),xh-xl,yh-yl);//(int) error,xh-xl,yh-yl);
             errorString = picture.analysis();
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
