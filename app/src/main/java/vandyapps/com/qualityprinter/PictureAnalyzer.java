@@ -115,10 +115,14 @@ public class PictureAnalyzer {
         }
     }
     //put the icon into the image now
-    public void putPointsInPicture(Bitmap image){
+    public void putPointsInPicture(Bitmap image, Boolean searchInside){
         for(int i = 0; i<x.size();i++){
             if(x.get(i)<image.getWidth()-errorPixels&&y.get(i)<image.getHeight()-errorPixels&&x.get(i)>errorPixels&&y.get(i)>errorPixels){
-                image.setPixel(x.get(i), y.get(i), Color.rgb(255, 255, 255));
+                if(searchInside&& Color.blue(image.getPixel(x.get(i),y.get(i)))>100 && Color.red(image.getPixel(x.get(i),y.get(i)))>100&&Color.green(image.getPixel(x.get(i),y.get(i)))>100){
+                    image.setPixel(x.get(i),y.get(i), Color.rgb(0,0,0));//if searchInside and not black (color of pla), make the pixel black. when you subtract from white blank, this becomes white so ad search for white
+                } else {//works as intended for black already, but no indication that its inside rather than out
+                    image.setPixel(x.get(i), y.get(i), Color.rgb(255, 255, 255));
+                }
                 //if error is selected, this adds more pixels
                 for(int j =1; j<errorPixels;j++){
                     image.setPixel(x.get(i) + j, y.get(i), Color.rgb(255, 255, 255));
@@ -132,12 +136,12 @@ public class PictureAnalyzer {
         }
     }
     //perform subtraction, blank is image that is changed
-    public double subtractImages(){
+    public double subtractImages(Boolean inside){
         findLayerBoundaries();
         getPoints();
         centerAdjustments();
-        putPointsInPicture(printed);
-        putPointsInPicture(blank);
+        putPointsInPicture(printed, inside);
+        putPointsInPicture(blank, false);
         int xmax1 = blank.getWidth();
         int ymax1 = blank.getHeight();
         int totalPixels = (x.size()), numberOfGreen=0;//comparing number outside to size of object
@@ -156,7 +160,7 @@ public class PictureAnalyzer {
                     int newGreen = Math.abs(green-green2);
                     int newBlue = Math.abs(blue-blue2);
                     int newRed = Math.abs(red-red2);
-                    if((newRed>20&&newGreen>45&&newBlue>35)) {
+                    if((newRed>20&&newGreen>45&&newBlue>35||(inside&&newRed==255&&newGreen==255&&newBlue==255))) {
                         numberOfGreen++;
                         blank.setPixel(i, j, Color.rgb(75, 160, 250));
                     }else
@@ -167,11 +171,11 @@ public class PictureAnalyzer {
         return (double)numberOfGreen/(double)totalPixels;
     }
     //perform analysis, printed is changed
-    public double analysis(){
+    public double analysis(Boolean inside){
         findLayerBoundaries();
         getPoints();
         centerAdjustments();
-        putPointsInPicture(printed);
+        putPointsInPicture(printed, inside);
         int xmax1 = printed.getWidth();
         int ymax1 = printed.getHeight();
         int totalPixels = (x.size());//comparing number outside to size of object

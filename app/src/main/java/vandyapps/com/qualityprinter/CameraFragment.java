@@ -109,6 +109,11 @@ public class CameraFragment extends Fragment {
             blankImage.setImageBitmap(printed);
             //printed=rotatedBitmap;
             mCamera.startPreview();
+            //this should fix the recycled bitmap problem
+            startMethod();
+            printer.put("isPrinting",true);
+            printer.put("error",errorString);
+            printer.saveInBackground();
          }
     };
 
@@ -133,11 +138,11 @@ public class CameraFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        error = getArguments().getDouble("pixelerror");
-        xl=Double.parseDouble(getArguments().getString("xmin"));
-        xh = Double.parseDouble(getArguments().getString("xmax"));
-        yl = Double.parseDouble(getArguments().getString("ymin"));
-        yh = Double.parseDouble(getArguments().getString("ymax"));
+        error = getArguments().getDouble("pixelerror");//TODO:change xh etc calculations back
+        xl=Double.parseDouble(getArguments().getString("xmin"))-6.5;
+        xh = Double.parseDouble(getArguments().getString("xmax"))+6.5;
+        yl = Double.parseDouble(getArguments().getString("ymin"))-6.5;
+        yh = Double.parseDouble(getArguments().getString("ymax"))+6.5;
         color = getArguments().getString("placolor");
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
@@ -233,7 +238,7 @@ public class CameraFragment extends Fragment {
                 //must do a background delay before analysis because the picture updated on callback
                 //nullpointer was happening because picture was not being saved
                 //may need to make longer because recycled, was 5 now 10
-                final Handler handler = new Handler();
+                /*final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -242,8 +247,8 @@ public class CameraFragment extends Fragment {
                         printer.put("error",errorString);
                         printer.saveInBackground();
                     }
-                }, 10000);
-
+                }, 10000);*/
+//moved to mjpeg2callback
             }
         });
         //////////////////for taking pictures
@@ -341,11 +346,12 @@ public class CameraFragment extends Fragment {
             //printed.recycle();
             //Log.e("errorP", printer.getInt("errorPixels")+"");
             PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, printer.getInt("errorPixels"), xh-xl, yh-yl);//(int)error, xh-xl, yh-yl);
-            errorString = picture.subtractImages();
+            errorString = picture.subtractImages(printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
             layer.recycle();
-            printed.recycle();
+            //printed.recycle();
+            //printed = null;
             edittedImage.setImageBitmap(blank1);
         } else if(printer.getString("method").equals("a")){//method.equals("analysis")){
             //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
@@ -375,11 +381,12 @@ public class CameraFragment extends Fragment {
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             //printed.recycle();
             PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,printer.getInt("errorPixels"),xh-xl,yh-yl);//(int) error,xh-xl,yh-yl);
-            errorString = picture.analysis();
+            errorString = picture.analysis(printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
             layer.recycle();
-            printed.recycle();
+            //printed.recycle();
+            //printed = null;
             edittedImage.setImageBitmap(printed1);
         }
         //mProgressContainer.setVisibility(View.INVISIBLE);
