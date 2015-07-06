@@ -118,19 +118,31 @@ public class PictureAnalyzer {
     public void putPointsInPicture(Bitmap image, Boolean searchInside){
         for(int i = 0; i<x.size();i++){
             if(x.get(i)<image.getWidth()-errorPixels&&y.get(i)<image.getHeight()-errorPixels&&x.get(i)>errorPixels&&y.get(i)>errorPixels){
-                if(searchInside&& Color.blue(image.getPixel(x.get(i),y.get(i)))>100 && Color.red(image.getPixel(x.get(i),y.get(i)))>100&&Color.green(image.getPixel(x.get(i),y.get(i)))>100){
+                //have to add check that it is not white (ie has not already been set by error pixel)
+                if(searchInside&&Color.blue(image.getPixel(x.get(i),y.get(i)))>100 && Color.red(image.getPixel(x.get(i),y.get(i)))>100&&Color.green(image.getPixel(x.get(i),y.get(i)))>100){
                     image.setPixel(x.get(i),y.get(i), Color.rgb(0,0,0));//if searchInside and not black (color of pla), make the pixel black. when you subtract from white blank, this becomes white so ad search for white
                 } else {//works as intended for black already, but no indication that its inside rather than out
                     image.setPixel(x.get(i), y.get(i), Color.rgb(255, 255, 255));
                 }
+            }
+        }
+
+        for(int i = 0; i<x.size();i++){
+            if(x.get(i)<image.getWidth()-errorPixels&&y.get(i)<image.getHeight()-errorPixels&&x.get(i)>errorPixels&&y.get(i)>errorPixels){
                 //if error is selected, this adds more pixels
-                for(int j =1; j<errorPixels;j++){
-                    image.setPixel(x.get(i) + j, y.get(i), Color.rgb(255, 255, 255));
-                    image.setPixel(x.get(i), y.get(i) + j, Color.rgb(255, 255, 255));
-                    image.setPixel(x.get(i) - j, y.get(i), Color.rgb(255, 255, 255));
-                    image.setPixel(x.get(i), y.get(i) - j, Color.rgb(255, 255, 255));
-                    image.setPixel(x.get(i) + j, y.get(i) + j, Color.rgb(255, 255, 255));
-                    image.setPixel(x.get(i) - j, y.get(i) - j, Color.rgb(255, 255, 255));
+                for(int j =1; j<errorPixels;j++){//added if statement in the case of searching inside
+                    if(Color.blue(image.getPixel(x.get(i)+j,y.get(i)))!=0)
+                        image.setPixel(x.get(i) + j, y.get(i), Color.rgb(255, 255, 255));
+                    if(Color.blue(image.getPixel(x.get(i),y.get(i)+j))!=0)
+                        image.setPixel(x.get(i), y.get(i) + j, Color.rgb(255, 255, 255));
+                    if(Color.blue(image.getPixel(x.get(i)-j,y.get(i)))!=0)
+                        image.setPixel(x.get(i) - j, y.get(i), Color.rgb(255, 255, 255));
+                    if(Color.blue(image.getPixel(x.get(i),y.get(i)-j))!=0)
+                        image.setPixel(x.get(i), y.get(i) - j, Color.rgb(255, 255, 255));
+                    if(Color.blue(image.getPixel(x.get(i)+j,y.get(i)+j))!=0)
+                        image.setPixel(x.get(i) + j, y.get(i) + j, Color.rgb(255, 255, 255));
+                    if(Color.blue(image.getPixel(x.get(i)-j,y.get(i)-j))!=0)
+                        image.setPixel(x.get(i) - j, y.get(i) - j, Color.rgb(255, 255, 255));
                 }
             }
         }
