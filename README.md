@@ -42,6 +42,7 @@ case x: Picasso.with(context).load(R.drawable.yourFile).resize(200,200).centerCr
             break;
 ```
 You will need to update the number of positions in this same class
+
 In the changeText() method of **EcoGallery.java** (in a different folder than the main project files) add:
 ```Java
 else if(getPosition()==x)
