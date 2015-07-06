@@ -75,8 +75,8 @@ public class PictureAnalyzer {
     public void resize(int scaledWidth, int scaledHeight){
         //the dimensions of the cropped image do not scale to the dimensions of the icon
         //this calculation done to account for 6.5mm buffer given by pronterface dimensions
-        scaledWidth = (int)((scaledWidth/xLength)*(xLength-13));
-        scaledHeight = (int)((scaledHeight/yHeight)*(yHeight-13));
+        scaledWidth = (int)((scaledWidth/xLength)*(xLength-12));//TODO: change to 13 if needed
+        scaledHeight = (int)((scaledHeight/yHeight)*(yHeight-12));
         //new resized calculation given new dimensions
         percentResizeY = ((double)layer.getHeight()/(double)scaledHeight);
         percentResizeX = ((double)layer.getWidth()/(double)scaledWidth);

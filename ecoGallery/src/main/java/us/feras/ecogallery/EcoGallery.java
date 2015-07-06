@@ -1207,6 +1207,8 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
             icon.setText("Square Ruler");
         else if(getPosition()==3)
             icon.setText("Cube");
+        else if(getPosition()==4)
+            icon.setText("Person");
         //icon.setText(getPosition()+"");
     }
     public void changeText(int i){
@@ -1219,6 +1221,8 @@ public class EcoGallery extends EcoGalleryAbsSpinner implements GestureDetector.
             icon.setText("Square Ruler");
         else if(i==3)
             icon.setText("Cube");
+        else if(i==4)
+            icon.setText("Person");
         //icon.setText(i+"");
     }
     public void setTextView(View v, int id){

@@ -139,10 +139,10 @@ public class CameraFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         error = getArguments().getDouble("pixelerror");//TODO:change xh etc calculations back
-        xl=Double.parseDouble(getArguments().getString("xmin"))-6.5;
-        xh = Double.parseDouble(getArguments().getString("xmax"))+6.5;
-        yl = Double.parseDouble(getArguments().getString("ymin"))-6.5;
-        yh = Double.parseDouble(getArguments().getString("ymax"))+6.5;
+        xl=Double.parseDouble(getArguments().getString("xmin"))-6;
+        xh = Double.parseDouble(getArguments().getString("xmax"))+6;
+        yl = Double.parseDouble(getArguments().getString("ymin"))-6;
+        yh = Double.parseDouble(getArguments().getString("ymax"))+6;
         color = getArguments().getString("placolor");
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
@@ -336,6 +336,10 @@ public class CameraFragment extends Fragment {
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.cube);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
                 layer1.recycle();
+            } else if(icon.equals("Person")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.standing);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
             } else {//if icon is null/empty
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.batarang);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
@@ -371,6 +375,10 @@ public class CameraFragment extends Fragment {
                 layer1.recycle();
             } else if(icon.equals("Cube")){
                 Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.cube);
+                layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
+                layer1.recycle();
+            } else if(icon.equals("Person")){
+                Bitmap layer1 = BitmapFactory.decodeResource(getResources(), R.drawable.standing);
                 layer = layer1.copy(Bitmap.Config.ARGB_8888, true);
                 layer1.recycle();
             } else {//if icon is null/empty
