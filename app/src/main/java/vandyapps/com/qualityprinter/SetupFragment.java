@@ -172,7 +172,6 @@ public class SetupFragment extends Fragment {
                 if(checkValues()) {
                     Intent i = new Intent(getActivity(), CameraActivity.class);
                     i.putExtra("pixelnumber", pixelBar.getProgress());
-                    // i.putExtra("PLAColor", color);
                     i.putExtra("searchInside", insideBox.isChecked());
                     i.putExtra("xmin", xminText);
                     i.putExtra("xmax", xmaxText);
@@ -192,7 +191,6 @@ public class SetupFragment extends Fragment {
                 if(checkValues()) {
                     Intent i = new Intent(getActivity(), CameraActivity.class);
                     i.putExtra("pixelnumber", pixelBar.getProgress());
-                    // i.putExtra("PLAColor", color);
                     i.putExtra("searchInside", insideBox.isChecked());
                     i.putExtra("xmin", xminText);
                     i.putExtra("xmax", xmaxText);

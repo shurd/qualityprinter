@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:background="#000">
+    <RelativeLayout android:id="@+id/camera_preview"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <SurfaceView android:id="@+id/camera_surfaceView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"/>
+        <vandyapps.com.qualityprinter.RectangleView
+            android:id="@+id/rectangle_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            </vandyapps.com.qualityprinter.RectangleView>
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:id="@+id/printed_image"/>
+            <ImageView
+                android:id="@+id/blank_image"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/top_layout"
+            android:layout_alignBottom="@+id/camera_surfaceView"
+            android:id="@+id/editted_image"/>
+    </RelativeLayout>
+    <FrameLayout android:id="@+id/camera_progressContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true">
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/layout_at_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:orientation="horizontal">
-        <SurfaceView
-            android:id="@+id/camera_surfaceView"
+        <Button android:id="@+id/take1_button"
+            android:layout_width="fill_parent"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:text="Blank"/>
+        <Button android:id="@+id/start_analysis"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Start"/>
     </LinearLayout>
-
 </FrameLayout>

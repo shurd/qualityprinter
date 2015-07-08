@@ -20,11 +20,8 @@ public class CameraActivity extends SingleFragmentActivity {
         String method = getIntent().getStringExtra("method");
         String icon = getIntent().getStringExtra("icon");
         String id = getIntent().getStringExtra("printerid");
-        //Log.e("xmin", xmin);
-
 
         return CameraFragment.newInstance(id, pixelError,inside,xmin,xmax,ymin,ymax,method, icon);
-        //return new CameraFragment();
     }
 }
 

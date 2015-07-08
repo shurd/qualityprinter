@@ -1,23 +1,12 @@
 package vandyapps.com.qualityprinter;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -29,19 +18,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Sam on 6/11/2015.
@@ -73,9 +57,7 @@ public class CameraFragment extends Fragment {
         public void onPictureTaken(byte[] data, Camera camera) {
             mProgressContainer.setVisibility(View.INVISIBLE);
             Bitmap picture = BitmapFactory.decodeByteArray(data, 0, data.length);
-            //
-            //PictureCropper here then call the get methods
-            //
+
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap rotatedBitmap = Bitmap.createBitmap(picture , 0, 0, picture.getWidth(), picture.getHeight(), matrix, true);
@@ -153,11 +135,6 @@ public class CameraFragment extends Fragment {
         getPrinterParse();
     }
 
-    //where to put this method
-    public void executeProgram(int n){
-
-    }
-
     //only run in on create to get object initially
     public void getPrinterParse(){
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Printer");
@@ -176,8 +153,7 @@ public class CameraFragment extends Fragment {
                     //TODO:
                     printer = object;
                 } else {
-                    //Log.e("parse error","error");
-                    // something went wrong
+                    //error
                 }
             }
         });
@@ -189,7 +165,7 @@ public class CameraFragment extends Fragment {
                 if (e == null) {
                     runTest = object.getBoolean("isPrinting");
                 } else {
-
+                    //error
                 }
             }
         });
@@ -198,9 +174,9 @@ public class CameraFragment extends Fragment {
     @Override
     @SuppressWarnings("deprecation")
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_crime_camera, parent, false);
+        View v = inflater.inflate(R.layout.fragment_camera, parent, false);
         ////////////////newest stuff
-        camPrev = (RelativeLayout)v.findViewById(R.id.crime_camera_preview);
+        camPrev = (RelativeLayout)v.findViewById(R.id.camera_preview);
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -209,7 +185,7 @@ public class CameraFragment extends Fragment {
         //camPrev.getLayoutParams().height = 1064;
         //////////////////
         ////////////////for taking pictures
-        mProgressContainer = v.findViewById(R.id.crime_camera_progressContainer);
+        mProgressContainer = v.findViewById(R.id.camera_progressContainer);
         mProgressContainer.setVisibility(View.INVISIBLE);
 
         rView = (RectangleView)v.findViewById(R.id.rectangle_view);
@@ -224,12 +200,7 @@ public class CameraFragment extends Fragment {
                 blankMethod();
             }
         });
-        /*take2Button = (Button)v.findViewById(R.id.take2_button);
-        take2Button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                printedMethod();
-            }
-        });*/
+
         start = (Button)v.findViewById(R.id.start_analysis);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,27 +213,12 @@ public class CameraFragment extends Fragment {
                     }
                     updatePrinter();
                 }
-                printedMethod();//here
-
-                //must do a background delay before analysis because the picture updated on callback
-                //nullpointer was happening because picture was not being saved
-                //may need to make longer because recycled, was 5 now 10
-                /*final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startMethod();
-                        printer.put("isPrinting",true);
-                        printer.put("error",errorString);
-                        printer.saveInBackground();
-                    }
-                }, 10000);*/
-//moved to mjpeg2callback
+                printedMethod();//parseupdated in picture callback
             }
         });
         //////////////////for taking pictures
 
-        mSurfaceView = (SurfaceView)v.findViewById(R.id.crime_camera_surfaceView);
+        mSurfaceView = (SurfaceView)v.findViewById(R.id.camera_surfaceView);
 
         SurfaceHolder holder = mSurfaceView.getHolder();
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -312,7 +268,6 @@ public class CameraFragment extends Fragment {
 
     public void printedMethod(){
         if (mCamera != null) {
-            //printed
             mCamera.takePicture(mShutterCallback2, null, mJpegCallBack2);
         }
     }
