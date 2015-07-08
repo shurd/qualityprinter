@@ -61,7 +61,7 @@ public class CameraFragment extends Fragment {
     private String color, method, icon, myId;
     private double error, errorString;
     public ParseObject printer;
-    private boolean runTest;
+    private boolean runTest, searchInside;
     private RelativeLayout camPrev;
     /////////////////////////below this for taking  a picture
     private Camera.ShutterCallback mShutterCallback = new Camera.ShutterCallback() {
@@ -118,10 +118,10 @@ public class CameraFragment extends Fragment {
     };
 
     /////////////////above this is for taking a picture
-    public static CameraFragment newInstance(String id, double pixelError, String color, String xmin, String xmax, String ymin, String ymax,String method, String iconStr){
+    public static CameraFragment newInstance(String id, double pixelError, boolean search, String xmin, String xmax, String ymin, String ymax,String method, String iconStr){
         Bundle args = new Bundle();
         args.putDouble("pixelerror",pixelError);
-        args.putString("placolor",color);
+        args.putBoolean("searchInside",search);
         args.putString("xmin", xmin);
         args.putString("xmax", xmax);
         args.putString("ymin", ymin);
@@ -143,7 +143,7 @@ public class CameraFragment extends Fragment {
         xh = Double.parseDouble(getArguments().getString("xmax"))+6;
         yl = Double.parseDouble(getArguments().getString("ymin"))-6;
         yh = Double.parseDouble(getArguments().getString("ymax"))+6;
-        color = getArguments().getString("placolor");
+        searchInside = getArguments().getBoolean("searchInside");
         method = getArguments().getString("method");
         icon = getArguments().getString("icon");
         runTest = true;
@@ -165,6 +165,15 @@ public class CameraFragment extends Fragment {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     runTest =  object.getBoolean("isPrinting"); //run if false
+                    //TODO:change back
+                    object.put("errorPixels", error);
+                    object.put("inside", searchInside);
+                    if(method.equals("subtraction"))
+                        object.put("method","s");
+                    else
+                        object.put("analysis","a");
+                    object.saveInBackground();
+                    //TODO:
                     printer = object;
                 } else {
                     //Log.e("parse error","error");
@@ -215,12 +224,12 @@ public class CameraFragment extends Fragment {
                 blankMethod();
             }
         });
-        take2Button = (Button)v.findViewById(R.id.take2_button);
+        /*take2Button = (Button)v.findViewById(R.id.take2_button);
         take2Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 printedMethod();
             }
-        });
+        });*/
         start = (Button)v.findViewById(R.id.start_analysis);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,7 +325,7 @@ public class CameraFragment extends Fragment {
 
     public void startMethod(){
         //mProgressContainer.setVisibility(View.VISIBLE);
-        if(printer.getString("method").equals("s")){//method.equals("subtraction")){
+        if(method.equals("subtraction")){//printer.getString("method").equals("s")){
             Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
             //blank.recycle();
             Bitmap layer;
@@ -348,16 +357,15 @@ public class CameraFragment extends Fragment {
 
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             //printed.recycle();
-            //Log.e("errorP", printer.getInt("errorPixels")+"");
-            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, printer.getInt("errorPixels"), xh-xl, yh-yl);//(int)error, xh-xl, yh-yl);
-            errorString = picture.subtractImages(printer.getBoolean("inside"));//TODO: change back
+            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);//printer.getInt("errorPixels"), xh-xl, yh-yl);
+            errorString = picture.subtractImages((searchInside));//printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
             layer.recycle();
             //printed.recycle();
             //printed = null;
             edittedImage.setImageBitmap(blank1);
-        } else if(printer.getString("method").equals("a")){//method.equals("analysis")){
+        } else if(method.equals("analysis")){//printer.getString("method").equals("a")){
             //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
             //blank.recycle();
             Bitmap layer;
@@ -388,8 +396,8 @@ public class CameraFragment extends Fragment {
             }
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             //printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,printer.getInt("errorPixels"),xh-xl,yh-yl);//(int) error,xh-xl,yh-yl);
-            errorString = picture.analysis(printer.getBoolean("inside"));//TODO: change back
+            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);//printer.getInt("errorPixels"),xh-xl,yh-yl);
+            errorString = picture.analysis(searchInside);//printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
             layer.recycle();

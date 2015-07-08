@@ -12,7 +12,7 @@ public class CameraActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
         int pixelError = getIntent().getIntExtra("pixelnumber", 5);
-        String Color = getIntent().getStringExtra("PLAColor");
+        boolean inside = getIntent().getBooleanExtra("searchInside", true);
         String xmin = getIntent().getStringExtra("xmin");
         String xmax = getIntent().getStringExtra("xmax");
         String ymin = getIntent().getStringExtra("ymin");
@@ -23,7 +23,7 @@ public class CameraActivity extends SingleFragmentActivity {
         //Log.e("xmin", xmin);
 
 
-        return CameraFragment.newInstance(id, pixelError,Color,xmin,xmax,ymin,ymax,method, icon);
+        return CameraFragment.newInstance(id, pixelError,inside,xmin,xmax,ymin,ymax,method, icon);
         //return new CameraFragment();
     }
 }

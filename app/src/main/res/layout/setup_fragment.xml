@@ -45,15 +45,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/view_image"
         android:text="@string/view_image"/>
-    <EditText
-        android:id="@+id/color_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:hint="@string/colorhint"
-        android:gravity="center_horizontal"/>
+
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -107,6 +101,21 @@
             android:layout_weight="1"
             android:hint="@string/ymax"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Inside?"/>
+        <CheckBox
+            android:id="@+id/insideCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
     <Button
         android:id="@+id/subtraction_button"
         android:layout_marginRight="25dp"

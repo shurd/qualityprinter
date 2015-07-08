@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,6 +50,7 @@ public class SetupFragment extends Fragment {
     private EcoGallery ecoGal;
     private ImageAdapter imgAdapter;
     private LinearLayout mLayout;
+    private CheckBox insideBox;
     private ImageView img;
     private String xminText, xmaxText, yminText, ymaxText, color, myId;
 
@@ -62,8 +64,8 @@ public class SetupFragment extends Fragment {
         }
 
         pixelBar = (SeekBar)v.findViewById(R.id.pixel_seek_bar);
-        pixelBar.setMax(25);
-        pixelBar.setProgress(0);
+        pixelBar.setMax(10);
+        pixelBar.setProgress(5);
         pixelBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -80,22 +82,7 @@ public class SetupFragment extends Fragment {
         pixelNumber = (TextView)v.findViewById(R.id.pixel_text);
         pixelNumber.setText(pixelBar.getProgress() + " pixels");
 
-        PLAColor = (EditText)v.findViewById(R.id.color_edit);
-        PLAColor.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,int before, int count) {
-                color = s.toString();
-            }
-        });
         xmin = (EditText)v.findViewById(R.id.xmin_text);
         xmin.addTextChangedListener(new TextWatcher() {
 
@@ -177,29 +164,36 @@ public class SetupFragment extends Fragment {
             }
         });
 
+        insideBox = (CheckBox)v.findViewById(R.id.insideCheckBox);
+
         subtractionButton = (Button)v.findViewById(R.id.subtraction_button);
         subtractionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent i = new Intent(getActivity(), CameraActivity.class);
-                i.putExtra("pixelnumber",pixelBar.getProgress());
-                i.putExtra("PLAColor", color);
-                i.putExtra("xmin", xminText);
-                i.putExtra("xmax", xmaxText);
-                i.putExtra("ymin", yminText);
-                i.putExtra("ymax", ymaxText);
-                i.putExtra("method","subtraction");
-                i.putExtra("icon", iconText.getText());
-                i.putExtra("printerid", myId);
-                startActivity(i);
+                if(checkValues()) {
+                    Intent i = new Intent(getActivity(), CameraActivity.class);
+                    i.putExtra("pixelnumber", pixelBar.getProgress());
+                    // i.putExtra("PLAColor", color);
+                    i.putExtra("searchInside", insideBox.isChecked());
+                    i.putExtra("xmin", xminText);
+                    i.putExtra("xmax", xmaxText);
+                    i.putExtra("ymin", yminText);
+                    i.putExtra("ymax", ymaxText);
+                    i.putExtra("method", "subtraction");
+                    i.putExtra("icon", iconText.getText());
+                    i.putExtra("printerid", myId);
+                    startActivity(i);
+                }
             }
         });
 
         analysisButton=(Button)v.findViewById(R.id.analysis_button);
         analysisButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                if(checkValues()) {
                     Intent i = new Intent(getActivity(), CameraActivity.class);
                     i.putExtra("pixelnumber", pixelBar.getProgress());
-                    i.putExtra("PLAColor", color);
+                    // i.putExtra("PLAColor", color);
+                    i.putExtra("searchInside", insideBox.isChecked());
                     i.putExtra("xmin", xminText);
                     i.putExtra("xmax", xmaxText);
                     i.putExtra("ymin", yminText);
@@ -208,6 +202,7 @@ public class SetupFragment extends Fragment {
                     i.putExtra("icon", iconText.getText());
                     i.putExtra("printerid", myId);
                     startActivity(i);
+                }
             }
         });
 
@@ -235,6 +230,35 @@ public class SetupFragment extends Fragment {
         //imm.hideSoftInputFromWindow(getActivity().getWindow().getCurrentFocus().getWindowToken(),0);
 
         return v;
+    }
+    public boolean checkValues(){
+        Toast toast;
+        if(Double.parseDouble(xminText)<2.31) {//6-2.69
+            toast = Toast.makeText(getActivity(), "xmin is too low!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else if(Double.parseDouble(xmaxText)>196.31) {
+            toast = Toast.makeText(getActivity(), "xmax is too high!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else if(Double.parseDouble(yminText)<6) {
+            toast = Toast.makeText(getActivity(), "ymin is too low!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else if(Double.parseDouble(ymaxText)>250) {
+            toast = Toast.makeText(getActivity(), "ymax is too high!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else if(Double.parseDouble(xmaxText)<Double.parseDouble(xminText)){
+            toast = Toast.makeText(getActivity(), "xmax is less than xmin!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else if(Double.parseDouble(ymaxText)<Double.parseDouble(yminText)) {
+            toast = Toast.makeText(getActivity(), "ymax is less than ymin!", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }else
+            return true;
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
