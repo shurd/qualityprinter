@@ -60,20 +60,24 @@ Open [Pronterface](www.pronterface.com) and navigate to ```Settings->Macros->New
 ```python
 !self.onecmd('G0 X200 Y250 Z190 F2000')
 ```
-Next, navigate to ```Settings->Macros->New``` again and create a macro named "quality_print". This macro will be used to detect when the printer has completed a layer and begin to run the analysis. In this macro put the lines of code found in "quality_print.py". The line that begins with "run_script" is a shell command and therefore does not need an "!". For this line you will need to add where the python script that tells the android device to run analysis is (ex: run_script python myDirectory). This python script is explained in the next section.
+Next, navigate to ```Settings->Macros->New``` again and create a macro named "quality_print". This macro will be used to detect when the printer has completed a layer and begin to run the analysis. In this macro put the lines of code found in "quality_print.py". For the line ```!exitcode = os.system"<path to __main__.py>")``` you will need to add where the python script that tells the android device to run analysis is. This python script is explained in the next section.
 ```python
+!import os
 !notRunBefore = True
 !while(self.p.printing and notRunBefore):
      !if (self.curlayer>0.350 and notRunBefore):
-          !self.update_pos()
-          !currentPositionX = self.current_pos[0]
-          !currentPositionY = self.current_pos[1]
-          !currentPositionZ = self.current_pos[2]
-          !self.pause() 
+          !self.pause() #1179
           !self.onecmd('G0 X200 Y250 Z190 F2000')
-          !time.sleep(15)
-          run_script python #insert directory where the parse python script is located (parsetest directory)
-          !self.pause()
+          !time.sleep(15) #analysis here, may not work
+          #insert path to __main__.py on your machine
+          !exitcode = os.system("<path to __main__.py>")
+          !if exitcode == 10: #end print
+               !print "Error too high. Stopping print"
+               !return
+          !elif exitcode == 15:
+               !print "Error within accepted bounds. Continuing print"
+               !self.onecmd('G0 X200 Y250 Z10 F2000')
+               !self.pause() #1179
           !notRunBefore = False
 !print "Continuing Print"
 ```
@@ -83,7 +87,9 @@ The folder named "parsetest" contains the python script necessary to tell the an
 
 ```pip install https://github.com/dgrtwo/ParsePy/archive/master.zip```
 
-Once you have parsetest on your computer, fill in where the directory is in the run_script command mentioned above. This will be something like "C:/Users/parsetest". In order for this script to run, you must tell it that it is a python script (run_script *python*), and you may have to put the [python](https://www.python.org/downloads/release/python-343/) application in the printrun folder where pronterface is located.
+Once you have parsetest on your computer, fill in the path to __main__.py in the os.system command mentioned above (in the proterface macro). This will be something like "C://Users//parsetest//__main__.py". In order for this script to run, you may have to put the [python](https://www.python.org/downloads/release/python-343/) application in the printrun folder where pronterface is located.
+
+Inside the __main__.py file, you will need to fill in several values identified by <>. You will need to fill in your printer id (found inside the Android application), an email (to be used to text a phone) and a phone number to text with details regarding the print.
 
 ##Running the Program
 Now that you have everything set up, you can begin printing with Quality Analysis.
@@ -91,7 +97,8 @@ Now that you have everything set up, you can begin printing with Quality Analysi
 * Start the Android app and enter these coordinates in the EditText boxes
 * In the Android app, select how many pixels you want to add to the outside of icon (Error Buffer)
 * Select the item you are printing. An image is selected when the TextView has its name displayed
-* At the bottom of the screen, a key will be displayed. This is your printer key and you will need to enter this key in the parsetest python code. Replace the two instances of "Umx4FElpfg" with that of your key. You will only need to do this once
+* Choose whether or not you wish to search inside of the icon for errors (in addition to searching outside)
+* At the bottom of the screen, a key will be displayed. This is your printer key and you will need to enter this key in the parsetest python code (mentioned earlier). You will only need to do this once
 * Click on "Subtraction" or "Analysis"
 * Press your "Blank Image Setting" button on Proterface
 * When the printer is done moving, set up the Android device on the stand such that the printer bed's border matches where the white rectangle is on the Camera View
