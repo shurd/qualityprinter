@@ -25,15 +25,15 @@
         android:text="@string/pixelNumber"
         android:textSize="15dp"
         android:layout_marginBottom="15dp"/>
-    <!--<ImageView
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image"/>-->
-    <us.feras.ecogallery.EcoGallery
+        android:layout_height="100dp"
+        android:id="@+id/image"/>
+    <!--<us.feras.ecogallery.EcoGallery
         android:id="@+id/gallery"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        />
+        />-->
     <TextView
         android:gravity="center"
         android:layout_width="match_parent"
@@ -65,6 +65,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:hint="@string/xmin"/>
         <EditText
             android:id="@+id/xmax_text"
@@ -72,6 +73,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:hint="@string/xmax"/>
         </LinearLayout>
     <TextView
@@ -92,6 +94,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:hint="@string/ymin"/>
         <EditText
             android:id="@+id/ymax_text"
@@ -99,6 +102,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="numberDecimal"
             android:hint="@string/ymax"/>
     </LinearLayout>
     <LinearLayout
@@ -138,5 +142,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="ID here"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:id="@+id/logout"/>
 
 </LinearLayout>

@@ -29,10 +29,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
+import com.parse.LogOutCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.squareup.picasso.Picasso;
 
@@ -42,17 +44,29 @@ import us.feras.ecogallery.EcoGallery;
  * Created by Sam on 6/10/2015.
  */
 public class SetupFragment extends Fragment {
+    static final public String USER_ID="vandyapps.user.id.parse";
     final private String myPrinter = "my_printer_id";
     private SeekBar pixelBar;
     private TextView pixelNumber, iconText,printerID;
     private EditText PLAColor, xmin, xmax, ymin, ymax;
-    private Button subtractionButton, analysisButton, viewImage;
+    private Button subtractionButton, analysisButton, viewImage, logout;
     private EcoGallery ecoGal;
-    private ImageAdapter imgAdapter;
+    //private ImageAdapter imgAdapter;
     private LinearLayout mLayout;
     private CheckBox insideBox;
     private ImageView img;
     private String xminText, xmaxText, yminText, ymaxText, color, myId;
+
+    public static SetupFragment newInstance(String id){
+        Bundle args = new Bundle();
+        args.putString("userID", id);
+
+        SetupFragment fragment = new SetupFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -203,13 +217,16 @@ public class SetupFragment extends Fragment {
                 }
             }
         });
+        img = (ImageView)v.findViewById(R.id.image);
+        Picasso.with(getActivity()).load("http://files.parsetfss.com/41a5a4ff-9d09-451f-85d5-8bb4113e9908/tfss-94e108e5-a2ba-4cb9-90e6-fc37f2c3bffb-myfile.png").into(img);
 
+/*TODO: ecogal
         imgAdapter = new ImageAdapter(getActivity());
         ecoGal = (EcoGallery)v.findViewById(R.id.gallery);
         ecoGal.setTextView(v, R.id.icon_text);
         ecoGal.setAdapter(imgAdapter);
         ecoGal.setSpacing(10);
-
+*/
         mLayout = (LinearLayout)v.findViewById(R.id.layout);
         mLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -226,6 +243,25 @@ public class SetupFragment extends Fragment {
 
         //InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //imm.hideSoftInputFromWindow(getActivity().getWindow().getCurrentFocus().getWindowToken(),0);
+
+        logout = (Button)v.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOutInBackground(new LogOutCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            //logOutSuccessful();
+                            Intent i = new Intent(getActivity(), StartActivity.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            //somethingWentWrong();
+                        }
+                    }
+                });
+            }
+        });
 
         return v;
     }
@@ -261,9 +297,12 @@ public class SetupFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
+        //TODO: may need to uncomment
+        //Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
 
-        final SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        myId = getArguments().getString("userID");
+
+        /*final SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         if(sharedPref.contains(myPrinter)){
             myId = sharedPref.getString(myPrinter,"");
         } else {
@@ -274,16 +313,16 @@ public class SetupFragment extends Fragment {
                     if (e == null) {
                         myId = newobj.getObjectId();
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(myPrinter, myId);
-                        editor.commit();
+                        //editor.putString(myPrinter, myId);
+                        //editor.commit();
                         if (printerID != null)
                             printerID.setText(myId + " is your printer ID");
                     }
                 }
             });
-        }
+        }*/
     }
-
+/* TODO ecogall
     private class ImageAdapter extends BaseAdapter {
         private Context context;
 
@@ -323,5 +362,5 @@ public class SetupFragment extends Fragment {
             }
             return view;
         }
-    }
+    }*/
 }

@@ -23,6 +23,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.io.IOException;
 import java.util.List;
@@ -130,19 +131,20 @@ public class CameraFragment extends Fragment {
         icon = getArguments().getString("icon");
         runTest = true;
         myId = getArguments().getString("printerid");
-        //initialize parse
-        Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
+        //TODO: possibly uncomment
+        //Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
         getPrinterParse();
     }
 
     //only run in on create to get object initially
     public void getPrinterParse(){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Printer");
-        query.getInBackground(myId, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();//ParseQuery.getQuery("User");
+        query.getInBackground(myId, new GetCallback<ParseUser>() {
+            public void done(ParseUser object, ParseException e) {
                 if (e == null) {
                     runTest =  object.getBoolean("isPrinting"); //run if false
                     //TODO:change back
+
                     object.put("errorPixels", error);
                     object.put("inside", searchInside);
                     if(method.equals("subtraction"))
@@ -150,6 +152,7 @@ public class CameraFragment extends Fragment {
                     else
                         object.put("analysis","a");
                     object.saveInBackground();
+
                     //TODO:
                     printer = object;
                 } else {
@@ -160,8 +163,8 @@ public class CameraFragment extends Fragment {
     }
 
     public void updatePrinter(){
-        printer.fetchInBackground(new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
+        printer.fetchInBackground(new GetCallback<ParseUser>() {
+            public void done(ParseUser object, ParseException e) {
                 if (e == null) {
                     runTest = object.getBoolean("isPrinting");
                 } else {
@@ -207,7 +210,7 @@ public class CameraFragment extends Fragment {
             public void onClick(View v) {
                 while(printer.getBoolean("isPrinting")){
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -280,7 +283,7 @@ public class CameraFragment extends Fragment {
 
     public void startMethod(){
         //mProgressContainer.setVisibility(View.VISIBLE);
-        if(method.equals("subtraction")){//printer.getString("method").equals("s")){
+        if(method.equals("subtraction")){//printer.getString("method").equals("s")){//TODO
             Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
             //blank.recycle();
             Bitmap layer;
@@ -312,7 +315,7 @@ public class CameraFragment extends Fragment {
 
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             //printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);//printer.getInt("errorPixels"), xh-xl, yh-yl);
+            PictureAnalyzer picture = new PictureAnalyzer(layer, blank1, printed1, (int)error, xh-xl, yh-yl);//printer.getInt("errorPixels"), xh-xl, yh-yl);//TODO
             errorString = picture.subtractImages((searchInside));//printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();
@@ -320,7 +323,7 @@ public class CameraFragment extends Fragment {
             //printed.recycle();
             //printed = null;
             edittedImage.setImageBitmap(blank1);
-        } else if(method.equals("analysis")){//printer.getString("method").equals("a")){
+        } else if(method.equals("analysis")){//printer.getString("method").equals("a")){//TODO
             //Bitmap blank1 = blank.copy(Bitmap.Config.ARGB_8888, true);
             //blank.recycle();
             Bitmap layer;
@@ -351,7 +354,7 @@ public class CameraFragment extends Fragment {
             }
             Bitmap printed1 = printed.copy(Bitmap.Config.ARGB_8888, true);
             //printed.recycle();
-            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);//printer.getInt("errorPixels"),xh-xl,yh-yl);
+            PictureAnalyzer picture = new PictureAnalyzer(layer, printed1,(int) error,xh-xl,yh-yl);//printer.getInt("errorPixels"),xh-xl,yh-yl);//TODO
             errorString = picture.analysis(searchInside);//printer.getBoolean("inside"));//TODO: change back
             Toast toast = Toast.makeText(getActivity(), errorString+"", Toast.LENGTH_LONG);
             toast.show();

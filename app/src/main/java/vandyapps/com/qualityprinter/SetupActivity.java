@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 public class SetupActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
-        return new SetupFragment();
+        String objectID = getIntent().getStringExtra("userID");
+
+        return SetupFragment.newInstance(objectID);
     }
 }

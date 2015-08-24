@@ -13,4 +13,18 @@
     <string name="setup">Setup Analysis</string>
     <string name="icon_text">Click an Image to Select it</string>
     <string name="view_image">View Full Image</string>
+    <string name="title">QUALITY</string>
+    <string name="username">Enter Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create an Account</string>
+    <string name="enterEmail">Enter Email</string>
+    <string name="enterPassword">Enter a Password</string>
+    <string name="reenter">Re-enter Password</string>
+    <string name="parse_app_id">OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m</string>
+    <string name="parse_client_id">F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA</string>
+    <string name="enterPhoneNumber">Enter Phone Number*</string>
+    <string name="optional">*optional - used to update you on status of print</string>
+    <string name="logout">Logout</string>
 </resources>
