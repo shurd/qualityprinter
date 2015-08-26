@@ -35,18 +35,6 @@
         android:layout_height="200dp"
         />-->
     <TextView
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/icon_text"
-        android:id="@+id/icon_text"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/view_image"
-        android:text="@string/view_image"/>
-
-    <TextView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +63,7 @@
             android:layout_weight="1"
             android:inputType="numberDecimal"
             android:hint="@string/xmax"/>
-        </LinearLayout>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,7 +107,7 @@
             android:id="@+id/insideCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        </LinearLayout>
+    </LinearLayout>
     <Button
         android:id="@+id/subtraction_button"
         android:layout_marginRight="25dp"

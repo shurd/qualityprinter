@@ -55,11 +55,13 @@ public class SetupFragment extends Fragment {
     private LinearLayout mLayout;
     private CheckBox insideBox;
     private ImageView img;
-    private String xminText, xmaxText, yminText, ymaxText, color, myId;
+    private String xminText, xmaxText, yminText, ymaxText, color, myId, modelID, imgURL;
 
-    public static SetupFragment newInstance(String id){
+    public static SetupFragment newInstance(String id, String modelid, String imgurl){
         Bundle args = new Bundle();
         args.putString("userID", id);
+        args.putString("modelID", modelid);
+        args.putString("imgURL",imgurl);
 
         SetupFragment fragment = new SetupFragment();
         fragment.setArguments(args);
@@ -166,8 +168,8 @@ public class SetupFragment extends Fragment {
             }
         });
 
-        iconText = (TextView)v.findViewById(R.id.icon_text);
-
+        //iconText = (TextView)v.findViewById(R.id.icon_text);
+        /*
         viewImage = (Button)v.findViewById(R.id.view_image);
         viewImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +178,7 @@ public class SetupFragment extends Fragment {
                 i.putExtra("imagetoload",iconText.getText());
                 startActivity(i);
             }
-        });
+        });*/
 
         insideBox = (CheckBox)v.findViewById(R.id.insideCheckBox);
 
@@ -218,7 +220,7 @@ public class SetupFragment extends Fragment {
             }
         });
         img = (ImageView)v.findViewById(R.id.image);
-        Picasso.with(getActivity()).load("http://files.parsetfss.com/41a5a4ff-9d09-451f-85d5-8bb4113e9908/tfss-94e108e5-a2ba-4cb9-90e6-fc37f2c3bffb-myfile.png").into(img);
+        Picasso.with(getActivity()).load(imgURL).into(img);
 
 /*TODO: ecogal
         imgAdapter = new ImageAdapter(getActivity());
@@ -301,6 +303,8 @@ public class SetupFragment extends Fragment {
         //Parse.initialize(getActivity(), "OGgfMc5oniUrtTH8bmxfI7NhCxb4akmBseHKWI3m", "F5QSRuhNYJ9qpiBsVvUOFJbNX2v0TJf0xeF9SCDA");
 
         myId = getArguments().getString("userID");
+        modelID = getArguments().getString("modelID");
+        imgURL = getArguments().getString("imgURL");
 
         /*final SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         if(sharedPref.contains(myPrinter)){

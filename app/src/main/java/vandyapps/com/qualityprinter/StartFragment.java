@@ -81,7 +81,7 @@ public class StartFragment extends Fragment {
                     ParseUser.logInInBackground(email, password, new LogInCallback() {
                         public void done(ParseUser user, ParseException e) {
                             if (e == null && user != null) {
-                                Intent i = new Intent(getActivity(), SetupActivity.class);
+                                Intent i = new Intent(getActivity(), ListActivity.class);//was SetupActivity.class
                                 i.putExtra("userID", user.getObjectId());
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);

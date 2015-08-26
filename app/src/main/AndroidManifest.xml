@@ -37,6 +37,9 @@
         <activity android:name=".CameraActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".ListActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
 
     </application>

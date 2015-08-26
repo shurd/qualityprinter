@@ -9,7 +9,9 @@ public class SetupActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
         String objectID = getIntent().getStringExtra("userID");
+        String modelID = getIntent().getStringExtra("modelID");
+        String imgURL = getIntent().getStringExtra("imgURL");
 
-        return SetupFragment.newInstance(objectID);
+        return SetupFragment.newInstance(objectID, modelID, imgURL);
     }
 }
