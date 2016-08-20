@@ -1,5 +1,5 @@
 # Quality Printer
-Quality Printer provides a process to check if the 3D printing is accurate.
+Quality Printer provides a process to check if the 3D printing is accurate. Publication can be found at [Springer](http://link.springer.com/chapter/10.1007%2F978-3-319-29003-4_12)
 # Setup
 The setup described is for printing a new object. If you are printing an object you have already printed before, you can skip this section.
 ### Slic3r
